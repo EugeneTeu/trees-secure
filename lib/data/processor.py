@@ -19,7 +19,7 @@ def analyse(page):
 
   # Get description
   temp_description = soup.find(class_="column description")
-  description = BeautifulSoup(str(temp_description), 'html.parser').get_text("\n", strip=True)
+  description = BeautifulSoup(str(temp_description), 'html.parser').get_text(" ", strip=True)
   page['description'] = description
 
   side_info = soup.find_all(class_="aside-info-block")
@@ -45,26 +45,31 @@ def analyse(page):
     temp_info = side_info[2]
     info = BeautifulSoup(str(temp_info), 'html.parser').get_text("\n", strip=True)
     details = info.split('\n')
+
     try:
-      scientific_name = details[2]
+      index = details.index('Scientific name')
+      scientific_name = details[index + 1]
       page['scientific_name'] = scientific_name
     except:
       page['scientific_name'] = None
 
     try:
-      common_name = details[4]
+      index = details.index('Common name')
+      common_name = details[index + 1]
       page['common_name'] = common_name
     except:
       page['common_name'] = None
 
     try:
-      girth = details[6]
+      index = details.index('Girth')
+      girth = details[index + 1]
       page['girth'] = girth
     except:
       page['girth'] = None
 
     try:
-      height = details[8]
+      index = details.index('Height')
+      height = details[index + 1]
       page['height'] = height
     except:
       page['height'] = None
