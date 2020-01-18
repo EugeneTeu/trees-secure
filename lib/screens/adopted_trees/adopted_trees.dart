@@ -26,32 +26,34 @@ class _AdoptedTreesState extends State<AdoptedTrees>
   }
 
   initTrees(BuildContext context) {
-    listOfTree.forEach((tree) {
-      var temp = ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          title: Text("Tree: ${tree.commonName}"),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            decoration: BoxDecoration(
-                border:
-                    Border(right: BorderSide(width: 1.0, color: Colors.black))),
-            child: Icon(Icons.dashboard, color: Colors.black),
-          ),
-          subtitle: Row(
-            children: <Widget>[
-              Icon(Icons.terrain, color: Theme.of(context).primaryColorDark),
-              Text(" ${tree.id}", style: TextStyle(color: Colors.black))
-            ],
-          ),
-          trailing: IconButton(
-            onPressed: () {
-              _showTreeDialog(context, tree);
-            },
-            icon: Icon(Icons.keyboard_arrow_right,
-                color: Colors.black, size: 30.0),
-          ));
-      listOfAdoptedTrees.add(temp);
+    setState(() {
+      listOfTree.forEach((tree) {
+        var temp = ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            title: Text("Tree: ${tree.commonName}"),
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(width: 1.0, color: Colors.black))),
+              child: Icon(Icons.dashboard, color: Colors.black),
+            ),
+            subtitle: Row(
+              children: <Widget>[
+                Icon(Icons.terrain, color: Theme.of(context).primaryColorDark),
+                Text(" ${tree.id}", style: TextStyle(color: Colors.black))
+              ],
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                _showTreeDialog(context, tree);
+              },
+              icon: Icon(Icons.keyboard_arrow_right,
+                  color: Colors.black, size: 30.0),
+            ));
+        listOfAdoptedTrees.add(temp);
+      });
     });
   }
 

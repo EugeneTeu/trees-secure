@@ -25,7 +25,6 @@ class _TreeViewState extends State<TreeView> {
     var fgColor = Color(0xfff2f2f2);
     double lineHeight = 16;
     return Container(
-      height: MediaQuery.of(context).size.height / 3 * 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
@@ -37,7 +36,7 @@ class _TreeViewState extends State<TreeView> {
             subtitle: Text("Scientific name"),
           ),
           Container(
-            height: MediaQuery.of(context).size.height / 10 * 5,
+            height: MediaQuery.of(context).size.height / 10 * 8,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5), color: fgColor),
             child: ListView(
