@@ -66,9 +66,14 @@ class FirestoreService {
   }
 
   void visitTree(String treeId) {
-    print(treeId);
     this.userDocument.updateData({
       'visited_trees': FieldValue.arrayUnion([treeId]),
+    });
+  }
+
+  void adoptTree(String treeId) {
+    this.userDocument.updateData({
+      'adopted_trees': FieldValue.arrayUnion([treeId]),
     });
   }
 }

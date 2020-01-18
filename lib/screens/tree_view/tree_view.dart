@@ -59,7 +59,9 @@ class TreeView extends StatelessWidget {
                       RaisedButton(
                         color: Colors.green,
                         child: Text("Adopt"),
-                        onPressed: () {},
+                        onPressed: () {
+                          this.fs.adoptTree(tree.id);
+                        },
                       ),
                     ],
                   )
