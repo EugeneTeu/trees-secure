@@ -10,8 +10,8 @@ class _VisitedTreesState extends State<VisitedTrees>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Text("Visited treees"),
+    return Container(
+      child: Text("Visited treees"),
     );
   }
 

@@ -46,6 +46,7 @@ class FirestoreService {
     return this.userDocument.setData({
       'adopted_trees': [],
       'created_at': DateTime.now(),
+      'is_dark_theme': false,
       'modified_at': DateTime.now(),
       'name': '',
       'visited_trees': [],
@@ -55,6 +56,12 @@ class FirestoreService {
   void setUserDisplayName(String name) {
     this.userDocument.updateData({
       'name': name,
+    });
+  }
+
+  void setDarkTheme(bool newBool) {
+    this.userDocument.updateData({
+      'is_dark_theme': newBool,
     });
   }
 }

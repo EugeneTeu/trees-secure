@@ -43,6 +43,10 @@ class _SettingsPageState extends State<SettingsPage>
     );
   }
 
+  void _onThemeToggle(bool newBool) {
+   this._fs.setDarkTheme(newBool);
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -68,6 +72,19 @@ class _SettingsPageState extends State<SettingsPage>
                   child: Text(user.name),
                   elevation: 0,
                   onPressed: () => _displayNameDialog(user.name),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'Dark Theme',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.body1.color,
+                  ),
+                ),
+                trailing: Switch(
+                  activeColor: Theme.of(context).primaryColor,
+                  value: user.isDarkTheme,
+                  onChanged: _onThemeToggle,
                 ),
               ),
               ListTile(

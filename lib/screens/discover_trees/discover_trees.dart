@@ -18,9 +18,8 @@ class _DiscoverTreesState extends State<DiscoverTrees>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Center(
-          child: SingleChildScrollView(
+    return Center(
+      child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -43,7 +42,7 @@ class _DiscoverTreesState extends State<DiscoverTrees>
             )
           ],
         ),
-      )),
+      ),
     );
   }
 
