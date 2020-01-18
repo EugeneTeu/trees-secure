@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
 import 'package:tree_secure/screens/discover_trees/discover_trees.dart';
+import 'package:tree_secure/screens/discover_trees/discover_trees_map.dart';
 import 'package:tree_secure/screens/settings_page/settings_page.dart';
 import 'package:tree_secure/screens/splash/splash_screen.dart';
 import 'package:tree_secure/screens/visited_trees/visited_trees.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> pages = [
     AdoptedTrees(),
-    DiscoverTrees(),
+    DiscoverTreesMap(),
     VisitedTrees(),
     SettingsPage()
   ];
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return MaterialApp(
-      theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
+      //theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
       home: Scaffold(
         key: _scaffoldKey,
         drawer: Drawer(
