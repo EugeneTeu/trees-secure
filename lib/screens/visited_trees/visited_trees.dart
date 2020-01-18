@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/models/user.dart';
+import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
 import 'package:tree_secure/screens/tree_view/tree_view.dart';
 import 'package:tree_secure/shared/loading_spinner.dart';
 
@@ -54,7 +55,6 @@ class _VisitedTreesState extends State<VisitedTrees>
     mapOfTrees = data.mapOfTree;
 
     print(listOfUserVisited);
-    
 
     return Card(
       elevation: 32.0,
