@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
+import 'package:tree_secure/screens/discover_trees/discover_trees.dart';
+import 'package:tree_secure/screens/visited_trees/visited_trees.dart';
 
 import 'package:tree_secure/services/auth_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final AuthService _auth = AuthService.instance;
+
+  List<Widget> pages = [AdoptedTrees(), DiscoverTrees(), VisitedTrees()];
+
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,26 +38,45 @@ class HomeScreen extends StatelessWidget {
             accountEmail: Text("user account email"),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              _onChangePage(0);
+            },
+            selected: 0 == index,
             title: Text('Adopted Trees'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              _onChangePage(1);
+            },
+            selected: 1 == index,
+            title: Text('Discover Trees'),
+          ),
+          ListTile(
+            onTap: () {
+              _onChangePage(2);
+            },
+            selected: 2 == index,
             title: Text('Visited Trees'),
           ),
           ListTile(
             onTap: () {
               this._auth.signOut();
+              Navigator.of(context).pop();
             },
             title: Text('Logout'),
           )
         ],
       )),
       appBar: AppBar(
-        title: Text('Tree Secure'),
+        title: Text('# Team Trees'),
         actions: <Widget>[],
       ),
-      body: Text('LOGGED IN'),
+      body: pages[index],
     );
+  }
+
+  _onChangePage(int selectedIndex) {
+    setState(() => index = selectedIndex);
+    Navigator.of(context).pop(); // close the drawer
   }
 }
