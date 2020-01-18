@@ -27,17 +27,14 @@ class _TreeViewState extends State<TreeView> {
     return Container(
       height: MediaQuery.of(context).size.height / 3 * 2,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.0),
+        borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      padding: EdgeInsets.all(26),
       child: Column(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: fgColor),
-            height: 50,
-            width: 50,
+          ListTile(
+            title: Text(tree.scientificName),
+            subtitle: Text("Scientific name"),
           ),
           Container(
             height: MediaQuery.of(context).size.height / 10 * 5,
@@ -46,10 +43,6 @@ class _TreeViewState extends State<TreeView> {
             child: ListView(
               physics: AlwaysScrollableScrollPhysics(),
               children: <Widget>[
-                ListTile(
-                  title: Text(tree.scientificName),
-                  subtitle: Text("Scientific name"),
-                ),
                 ListTile(
                   title: Text(tree.commonName),
                   subtitle: Text("Common name"),
@@ -70,6 +63,7 @@ class _TreeViewState extends State<TreeView> {
                   title: Text(tree.location),
                   subtitle: Text("location"),
                 ),
+                ListTile()
               ],
             ),
           ),

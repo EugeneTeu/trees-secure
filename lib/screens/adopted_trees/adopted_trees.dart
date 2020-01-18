@@ -77,6 +77,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
     final StaticData data = Provider.of<StaticData>(context);
 
     listOfTree = data.listOfTree;
+
     initTrees(context);
 
     return Card(
@@ -91,6 +92,18 @@ class _AdoptedTreesState extends State<AdoptedTrees>
                 Row(),
                 ListTile(
                   enabled: true,
+                  title: Text("Refresh"),
+                  trailing: IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: () {
+                      setState(() {
+                        initTrees(context);
+                      });
+                    },
+                  ),
+                ),
+                ListTile(
+                  enabled: true,
                   title: Text("Number of Trees Visited:"),
                   trailing: Text('${user.visitedTrees.length}'),
                 ),
@@ -102,7 +115,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
                 Text("These are your adopted Trees"),
                 SizedBox(height: 8.0),
                 Container(
-                  height: MediaQuery.of(context).size.height / 3 * 2,
+                  height: MediaQuery.of(context).size.height / 4 * 2.45,
                   child: listOfAdoptedTrees.length == 0
                       ? Text("error")
                       : ListView.builder(
