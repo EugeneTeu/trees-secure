@@ -59,16 +59,20 @@ class _AdoptedTreesState extends State<AdoptedTrees>
 
   void _showTreeDialog(BuildContext context, Tree tree) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              elevation: 0.0,
-              backgroundColor: Colors.transparent,
-              child: TreeView(tree));
-        });
+      context: context,
+      builder: (_) {
+        return Theme(
+          data: Theme.of(context),
+          child: Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            elevation: 0.0,
+            child: TreeView(tree),
+          ),
+        );
+      },
+    );
   }
 
   @override
