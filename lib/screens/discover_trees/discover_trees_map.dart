@@ -43,6 +43,19 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
           infoWindow: InfoWindow(
             title: tree.commonName,
             snippet: 'Tap for more information',
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext _) {
+                  return Theme(
+                    data: Theme.of(context),
+                    child: Dialog(
+                      child: TreeView(tree),
+                    ),
+                  );
+                },
+              );
+            },
           ),
         ),
       );
