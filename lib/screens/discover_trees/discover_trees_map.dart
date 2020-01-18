@@ -77,6 +77,9 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
         ),
         myLocationEnabled: true,
         onMapCreated: (GoogleMapController ctrl) {
+          if (_mapDarkTheme == null || _mapLightTheme == null) {
+            return ;
+          }
           if (user.isDarkTheme) {
             ctrl.setMapStyle(_mapDarkTheme);
           } else {

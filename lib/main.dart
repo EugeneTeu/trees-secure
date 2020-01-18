@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<StaticData>(
           create: (_) => StaticData()..loadTreeFromJson(),
         ),
-        StreamProvider<AuthUser>(
-            create: (context) => AuthService.instance.currUserModel)
+        StreamProvider<AuthUser>.value(
+          value: AuthService.instance.currUserModel,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
