@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
 import 'package:tree_secure/screens/discover_trees/discover_trees.dart';
+import 'package:tree_secure/screens/settings_page/settings_page.dart';
 import 'package:tree_secure/screens/splash/splash_screen.dart';
 import 'package:tree_secure/screens/visited_trees/visited_trees.dart';
 import 'package:tree_secure/services/auth_service.dart';
@@ -17,7 +18,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final AuthService _auth = AuthService.instance;
 
-  List<Widget> pages = [AdoptedTrees(), DiscoverTrees(), VisitedTrees()];
+  List<Widget> pages = [
+    AdoptedTrees(),
+    DiscoverTrees(),
+    VisitedTrees(),
+    SettingsPage()
+  ];
 
   int index = 0;
 
@@ -54,6 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               accountName: Text(user.name),
               accountEmail: Text(authUser.user.email),
+              otherAccountsPictures: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () {
+                    print('test');
+                    _onChangePage(3);
+                  },
+                ),
+              ],
             ),
             ListTile(
               onTap: () {
@@ -87,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        title: Text('# Team Trees'),
+        title: Text('#TeamTrees'),
         actions: <Widget>[],
       ),
       body: pages[index],

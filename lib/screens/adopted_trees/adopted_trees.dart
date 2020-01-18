@@ -19,8 +19,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: Center(
-          child: Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -32,15 +31,16 @@ class _AdoptedTreesState extends State<AdoptedTrees>
           ),
           Text("These are your adopted Trees"),
           SizedBox(height: 8.0),
-          SingleChildScrollView(
-            child: ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return listOfAdoptedTrees[index];
-              },
-            ),
-          )
+          /*
+      SingleChildScrollView(
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return listOfAdoptedTrees[index];
+          },
+        ),
+      )*/
         ],
-      )),
+      ),
     );
   }
 
