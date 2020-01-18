@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/models/user.dart';
+import 'package:tree_secure/models/user_list.dart';
 import 'package:tree_secure/screens/tree_view/tree_view.dart';
 import 'package:tree_secure/shared/loading_spinner.dart';
 
@@ -47,10 +48,11 @@ class _AdoptedTreesState extends State<AdoptedTrees>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final User user = Provider.of<User>(context);
     final StaticData data = Provider.of<StaticData>(context);
+    final User user = Provider.of<User>(context);
+    final UserList userLst = Provider.of<UserList>(context);
 
-    listOfTree = data.listOfTree;
+    listOfTree = userLst.listOfAdoptedTree;
 
     return Card(
       elevation: 32.0,
@@ -58,43 +60,57 @@ class _AdoptedTreesState extends State<AdoptedTrees>
           ? LoadingSpinner()
           : Container(
               height: MediaQuery.of(context).size.height - 32.0,
-              child: ListView.builder(
-                physics: AlwaysScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                cacheExtent: 20.0,
-                shrinkWrap: true,
-                itemCount: listOfTree.length,
-                itemBuilder: (BuildContext context, int index) {
-                  Tree tempTree = listOfTree[index];
-
-                  return ListTile(
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
-                      title: Text("Tree: ${tempTree.commonName}"),
-                      leading: Container(
-                        padding: EdgeInsets.only(right: 12.0),
-                        decoration: BoxDecoration(
-                            border: Border(right: BorderSide(width: 1.0))),
-                        child: Icon(
-                          Icons.dashboard,
+              child: listOfTree.length == 0
+                  ? Center(
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "You have not adopted any trees!",
+                          style: TextStyle(fontSize: 24.0),
                         ),
-                      ),
-                      subtitle: Row(
-                        children: <Widget>[
-                          Icon(Icons.terrain,
-                              color: Theme.of(context).primaryColorDark),
-                          Text(" ${tempTree.id}", style: TextStyle())
-                        ],
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          _showTreeDialog(context, tempTree);
-                        },
-                        icon: Icon(Icons.keyboard_arrow_right, size: 30.0),
-                      ));
-                  ;
-                },
-              ),
+                        Text("Head over to Discover trees!",
+                            style: TextStyle(fontSize: 24.0))
+                      ],
+                    ))
+                  : ListView.builder(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      cacheExtent: 20.0,
+                      shrinkWrap: true,
+                      itemCount: listOfTree.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Tree tempTree = listOfTree[index];
+
+                        return ListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 10.0),
+                            title: Text("Tree: ${tempTree.commonName}"),
+                            leading: Container(
+                              padding: EdgeInsets.only(right: 12.0),
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border(right: BorderSide(width: 1.0))),
+                              child: Icon(
+                                Icons.dashboard,
+                              ),
+                            ),
+                            subtitle: Row(
+                              children: <Widget>[
+                                Icon(Icons.terrain,
+                                    color: Theme.of(context).primaryColorDark),
+                                Text(" ${tempTree.id}", style: TextStyle())
+                              ],
+                            ),
+                            trailing: IconButton(
+                              onPressed: () {
+                                _showTreeDialog(context, tempTree);
+                              },
+                              icon:
+                                  Icon(Icons.keyboard_arrow_right, size: 30.0),
+                            ));
+                      },
+                    ),
             ),
     );
   }

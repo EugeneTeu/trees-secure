@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tree_secure/models/static_data.dart';
+import 'package:tree_secure/models/user_list.dart';
 
 import 'package:tree_secure/screens/auth/auth_screen.dart';
 import 'package:tree_secure/screens/home/home_screen.dart';
@@ -25,9 +27,7 @@ class AuthWrapper extends StatelessWidget {
       // UserModel is ok; user is authenticated successfully
       FirestoreService.initInstance(uid: authUser.uid);
       return StreamProvider<User>.value(
-        value: FirestoreService.instance.currUser,
-        child: HomeScreen(),
-      );
+          value: FirestoreService.instance.currUser, child: HomeScreen());
     }
   }
 }
