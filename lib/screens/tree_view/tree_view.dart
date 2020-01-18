@@ -15,6 +15,7 @@ class TreeView extends StatelessWidget {
         children: ListTile.divideTiles(
           context: context,
           tiles: [
+            Image.network(tree.image),
             ListTile(
               title: Text(tree.scientificName),
               subtitle: Text("Scientific Name"),

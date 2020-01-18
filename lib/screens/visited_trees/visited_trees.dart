@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tree_secure/screens/stripe_pay/stripe_pay.dart';
+import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
 
 class VisitedTrees extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _VisitedTreesState extends State<VisitedTrees>
   Widget build(BuildContext context) {
     super.build(context);
     return Container(
-      child: StripePay(),
+      child: WebviewStripe(),
     );
   }
 
