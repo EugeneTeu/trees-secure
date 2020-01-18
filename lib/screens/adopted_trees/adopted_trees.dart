@@ -74,40 +74,38 @@ class _AdoptedTreesState extends State<AdoptedTrees>
       elevation: 32.0,
       child: isLoading
           ? LoadingSpinner()
-          : Scaffold(
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  SizedBox(height: 8.0),
-                  Row(),
-                  ListTile(
-                    enabled: true,
-                    title: Text("Number of Trees Visited:"),
-                    trailing: Text('${user.visitedTrees.length}'),
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(height: 8.0),
+                Row(),
+                ListTile(
+                  enabled: true,
+                  title: Text("Number of Trees Visited:"),
+                  trailing: Text('${user.visitedTrees.length}'),
+                ),
+                ListTile(
+                  enabled: true,
+                  title: Text("Number of Trees Adopted:"),
+                  trailing: Text('${user.adoptedTrees.length}'),
+                ),
+                Text("These are your adopted Trees"),
+                SizedBox(height: 8.0),
+                Container(
+                  height: MediaQuery.of(context).size.height / 3 * 2,
+                  child: ListView.builder(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    cacheExtent: 20.0,
+                    shrinkWrap: true,
+                    itemCount: 255,
+                    itemBuilder: (BuildContext context, int index) {
+                      return listOfAdoptedTrees[index];
+                    },
                   ),
-                  ListTile(
-                    enabled: true,
-                    title: Text("Number of Trees Adopted:"),
-                    trailing: Text('${user.adoptedTrees.length}'),
-                  ),
-                  Text("These are your adopted Trees"),
-                  SizedBox(height: 8.0),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 3 * 2,
-                    child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      cacheExtent: 20.0,
-                      shrinkWrap: true,
-                      itemCount: 255,
-                      itemBuilder: (BuildContext context, int index) {
-                        return listOfAdoptedTrees[index];
-                      },
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
     );
   }
