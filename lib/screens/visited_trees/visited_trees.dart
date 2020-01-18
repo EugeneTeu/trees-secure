@@ -95,7 +95,8 @@ class _VisitedTreesState extends State<VisitedTrees>
                                   border:
                                       Border(right: BorderSide(width: 1.0))),
                               child: Icon(
-                                Icons.dashboard,
+                                LineIcons.tree,
+                                size: 50,
                               ),
                             ),
                             subtitle: Row(
