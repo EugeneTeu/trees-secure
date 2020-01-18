@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=1.10.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -28,6 +28,8 @@ dependencies:
   cloud_firestore: ^0.12.9+5
   flutter_map: any
   latlong: any
+  webview_flutter: any
+  url_launcher: any
 
 
 
