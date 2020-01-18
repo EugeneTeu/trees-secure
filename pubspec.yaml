@@ -71,6 +71,7 @@ flutter:
     - assets/trees.json
     - assets/map_dark_theme.json
     - assets/map_light_theme.json
+    - assets/stripe_checkout.html
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

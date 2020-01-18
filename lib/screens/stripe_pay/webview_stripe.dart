@@ -1,33 +1,36 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewStripe extends StatefulWidget {
+class WebviewStripe extends StatefulWidget {
   @override
-  _WebViewStripeState createState() {
+  _WebviewStripeState createState() {
     // TODO: implement createState
-    return _WebViewStripeState();
+    return _WebviewStripeState();
   }
 }
 
-class _WebViewStripeState extends State<WebViewStripe> {
+class _WebviewStripeState extends State<WebviewStripe> {
   Completer<WebViewController> _controller = Completer<WebViewController>();
-  final Set<String> _favorites = Set<String>();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 3 * 2,
-      width: 500,
-      child: WebView(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl:
-            Uri.dataFromString("stripe url", mimeType: 'text/html').toString(),
-        onWebViewCreated: (WebViewController webViewController) {
-          print("completed");
-          _controller.complete(webViewController);
-        },
-      ),
-    );
+    return FutureBuilder<String>(
+        future: rootBundle.loadString('assets/stripe_checkout.html'),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return WebView(
+              initialUrl: new Uri.dataFromString(snapshot.data,
+                      mimeType: 'text/html')
+                  .toString(), // maybe you Uri.dataFromString(snapshot.data, mimeType: 'text/html', encoding: Encoding.getByName("UTF-8")).toString()
+              javascriptMode: JavascriptMode.unrestricted,
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return CircularProgressIndicator();
+        });
   }
 }
