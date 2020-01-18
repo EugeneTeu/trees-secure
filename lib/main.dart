@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tree_secure/Themes/cs_prayer_theme.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  static final CsPrayerTheme csPrayerTheme = CsPrayerTheme();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tree-secure',
-      theme: ThemeData(
-          primarySwatch: Colors.green[800], accentColor: Colors.green[700]),
+      theme: csPrayerTheme.theme,
       home: MyHomePage(title: 'Tree-Secure'),
     );
   }

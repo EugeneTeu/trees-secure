@@ -17,6 +17,7 @@ Tree _$TreeFromJson(Map<String, dynamic> json) {
     scientificName: json['scientific_name'] as String,
     girth: json['girth'] as String,
     height: json['height'] as String,
+    description: json['description'] as String,
   );
 }
 
@@ -38,5 +39,6 @@ Map<String, dynamic> _$TreeToJson(Tree instance) {
   val['scientific_name'] = instance.scientificName;
   val['girth'] = instance.girth;
   val['height'] = instance.height;
+  val['description'] = instance.description;
   return val;
 }
