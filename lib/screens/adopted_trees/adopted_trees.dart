@@ -16,7 +16,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
     with AutomaticKeepAliveClientMixin {
   final List<Widget> listOfAdoptedTrees = [];
   final List<Tree> listOfTree = [];
-  bool isLoading;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -31,11 +31,17 @@ class _AdoptedTreesState extends State<AdoptedTrees>
   }
 
   loadTreeFromJson() async {
-    String data = await rootBundle.loadString("assets/formatted_trees.json");
+    String data = await rootBundle.loadString("assets/trees2.json");
     Map<String, dynamic> jsonResult = json.decode(data);
     jsonResult.forEach((String key, dynamic object) {
       Tree temp = Tree();
-      temp.commonName = object['Common name'];
+      temp.link = object['link'];
+      temp.commonName = object['common_name:'];
+      temp.girth = object['girth:'];
+      temp.location = object['location:'];
+      temp.scientificName = object["scientific_name:"];
+      temp.description = object['description'];
+      temp.height = object['height'];
       temp.id = key;
       listOfTree.add(temp);
     });
@@ -44,7 +50,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
       var temp = ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          title: Text("Tree ID: ${tree.id}"),
+          title: Text("Tree: ${tree.commonName}"),
           leading: Container(
             padding: EdgeInsets.only(right: 12.0),
             decoration: BoxDecoration(
@@ -55,7 +61,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
           subtitle: Row(
             children: <Widget>[
               Icon(Icons.terrain, color: Theme.of(context).primaryColorDark),
-              Text(" TREEE", style: TextStyle(color: Colors.black))
+              Text(" ${tree.id}", style: TextStyle(color: Colors.black))
             ],
           ),
           trailing: Icon(Icons.keyboard_arrow_right,

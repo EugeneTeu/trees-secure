@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return MaterialApp(
-      theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
+      // theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
       home: Scaffold(
         key: _scaffoldKey,
         drawer: Drawer(
