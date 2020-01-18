@@ -19,12 +19,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
+  provider: any
+  geojson: any
+  stripe_payment: ^1.0.6
   firebase_core: ^0.4.0+9
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+5
-  provider: ^4.0.1
-  geojson: 0.8.0
+
 
   # To update the model serializer files, run this command:
   # flutter pub run build_runner build
