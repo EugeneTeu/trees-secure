@@ -27,7 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
     final AuthUser authUser = Provider.of<AuthUser>(context);
 
     if (user == null) {
-      return SplashScreen();
+      return SplashScreen(
+        isDataDocEmpty: false,
+      );
+    } else if (user.id == null) {
+      return SplashScreen(
+        isDataDocEmpty: true,
+      );
     }
 
     return Scaffold(

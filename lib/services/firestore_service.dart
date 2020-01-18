@@ -29,10 +29,26 @@ class FirestoreService {
         this.uid = uid;
 
   User _createUser(DocumentSnapshot doc) {
-    return doc.data == null ? null : User.fromJson(doc.data);
+    if (doc.data == null) {
+      return User();
+    }
+
+    User userDoc = User.fromJson(doc.data);
+    userDoc.id = doc.documentID;
+    return userDoc;
   }
 
   Stream<User> get currUser {
     return this.userDocument.snapshots().map(_createUser);
+  }
+
+  void createUserDoc() async {
+    return this.userDocument.setData({
+      'adopted_trees': [],
+      'created_at': DateTime.now(),
+      'modified_at': DateTime.now(),
+      'name': '',
+      'visited_trees': [],
+    });
   }
 }

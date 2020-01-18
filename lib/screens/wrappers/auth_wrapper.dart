@@ -15,7 +15,9 @@ class AuthWrapper extends StatelessWidget {
 
     if (authUser == null) {
       // on first startup; show splashscreen to get UserModel
-      return SplashScreen();
+      return SplashScreen(
+        isDataDocEmpty: false,
+      );
     } else if (!authUser.hasData) {
       // UserModel no data; user is not authenticated yet
       return AuthScreen();
