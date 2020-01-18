@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/user.dart';
+import 'package:tree_secure/models/user.dart';
+import 'package:tree_secure/models/static_data.dart';
+import 'package:tree_secure/models/tree.dart';
 
 class DiscoverTreesMap extends StatefulWidget {
   @override
@@ -26,24 +30,41 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
     });
   }
 
-  Set<Marker> _buildMarkers() {
+  Set<Marker> _buildMarkers(Map<String, Tree> treeData, BuildContext context) {
     Set<Marker> markers = Set<Marker>();
-    markers.add(
-      Marker(
-        markerId: MarkerId('value'),
-        position: const LatLng(1.3521, 103.8198),
-        infoWindow: InfoWindow(
-          title: 'TITLE',
-          snippet: 'INFO',
+
+    treeData.forEach((String id, Tree tree) {
+      List coordinates = jsonDecode(tree.coordinates);
+      markers.add(
+        Marker(
+          markerId: MarkerId(id),
+          position: LatLng(coordinates[0], coordinates[1]),
+          infoWindow: InfoWindow(
+            title: tree.commonName,
+            // snippet: tree.description,
+          ),
+          onTap: () {
+            // Scaffold.of(context).showBottomSheet((context) {
+            //   return Container(
+            //     height: 250,
+            //     width: double.infinity,
+            //     child: Center(
+            //       child: Text(tree.id),
+            //     ),
+            //   );
+            // });
+          },
         ),
-      ),
-    );
+      );
+    });
     return markers;
   }
 
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<User>(context);
+    final Map<String, Tree> treeData =
+        Provider.of<StaticData>(context, listen: false).mapOfTree;
 
     return Container(
       child: GoogleMap(
@@ -59,7 +80,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
             ctrl.setMapStyle(_mapLightTheme);
           }
         },
-        markers: _buildMarkers(),
+        markers: _buildMarkers(treeData, context),
       ),
     );
   }
