@@ -31,6 +31,7 @@ dependencies:
   latlong: any
   webview_flutter: any
   url_launcher: any
+  line_icons: 0.2.0
 
 
 
