@@ -50,8 +50,10 @@ class _VisitedTreesState extends State<VisitedTrees>
     final StaticData data = Provider.of<StaticData>(context);
     final User user = Provider.of<User>(context);
 
-    listOfUserVisited = user.adoptedTrees;
+    listOfUserVisited = user.visitedTrees;
     mapOfTrees = data.mapOfTree;
+
+    print(listOfUserVisited);
 
     return Card(
       elevation: 32.0,

@@ -64,4 +64,11 @@ class FirestoreService {
       'is_dark_theme': newBool,
     });
   }
+
+  void visitTree(String treeId) {
+    print(treeId);
+    this.userDocument.updateData({
+      'visited_trees': FieldValue.arrayUnion([treeId]),
+    });
+  }
 }

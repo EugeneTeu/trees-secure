@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:tree_secure/models/tree.dart';
+import 'package:tree_secure/services/firestore_service.dart';
 
 class TreeView extends StatelessWidget {
   TreeView(this.tree, this.fromDiscoverScreen);
 
   final Tree tree;
   final bool fromDiscoverScreen;
+  final FirestoreService fs = FirestoreService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class TreeView extends StatelessWidget {
         children: ListTile.divideTiles(
           context: context,
           tiles: [
-            Image.network(tree.image),
+            ...(tree.image == null ? [] : [Image.network(tree.image)]),
             ListTile(
               title: Text(tree.scientificName),
               subtitle: Text("Scientific Name"),
@@ -45,15 +48,16 @@ class TreeView extends StatelessWidget {
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
                       RaisedButton(
-                        color: Colors.redAccent,
-                        child: Text("cancel"),
+                        color: Colors.blueAccent,
+                        child: Text("Visit"),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          this.fs.visitTree(tree.id);
                         },
                       ),
                       Divider(),
                       RaisedButton(
-                        child: Text("Adopt this tree!"),
+                        color: Colors.green,
+                        child: Text("Adopt"),
                         onPressed: () {},
                       ),
                     ],
