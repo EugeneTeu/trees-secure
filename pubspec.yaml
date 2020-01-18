@@ -22,7 +22,8 @@ dependencies:
   
   firebase: any
   provider: any
-  geojson: 0.8.0
+  geojson: any
+  stripe_payment: ^1.0.6
 
   # To update the model serializer files, run this command:
   # flutter pub run build_runner build

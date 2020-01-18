@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tree_secure/Themes/cs_prayer_theme.dart';
+import 'package:tree_secure/views/stripe_pay.dart';
 
 void main() => runApp(MyApp());
 
@@ -54,7 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => StripePay(),
+          ));
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
