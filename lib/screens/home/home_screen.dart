@@ -94,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               onTap: () {
                 this._auth.signOut();
-                Navigator.of(context).pop();
               },
               title: Text('Logout'),
             )
