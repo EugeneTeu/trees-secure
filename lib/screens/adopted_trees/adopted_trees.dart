@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/models/user.dart';
 import 'package:tree_secure/shared/loading_spinner.dart';
@@ -15,31 +16,15 @@ class AdoptedTrees extends StatefulWidget {
 class _AdoptedTreesState extends State<AdoptedTrees>
     with AutomaticKeepAliveClientMixin {
   final List<Widget> listOfAdoptedTrees = [];
-  final List<Tree> listOfTree = [];
+  List<Tree> listOfTree = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    isLoading = true;
-    //load from provider here
-    loadTreeFromJson().then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    });
   }
 
-  loadTreeFromJson() async {
-    String data = await rootBundle.loadString("assets/trees.json");
-    Map<String, dynamic> jsonResult = json.decode(data);
-    jsonResult.forEach((String key, dynamic object) {
-      Tree temp = Tree();
-      temp = Tree.fromJson(object);
-      temp.id = key;
-      listOfTree.add(temp);
-    });
-
+  initTrees() {
     listOfTree.forEach((tree) {
       var temp = ListTile(
           contentPadding:
@@ -58,16 +43,22 @@ class _AdoptedTreesState extends State<AdoptedTrees>
               Text(" ${tree.id}", style: TextStyle(color: Colors.black))
             ],
           ),
-          trailing: Icon(Icons.keyboard_arrow_right,
-              color: Colors.black, size: 30.0));
+          trailing: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.keyboard_arrow_right,
+                color: Colors.black, size: 30.0),
+          ));
       listOfAdoptedTrees.add(temp);
     });
-    print(listOfTree[0].toJson());
   }
 
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<User>(context);
+    final StaticData data = Provider.of<StaticData>(context);
+
+    listOfTree = data.listOfTree;
+    initTrees();
 
     super.build(context);
     return Card(

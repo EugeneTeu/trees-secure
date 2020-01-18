@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:tree_secure/models/base_class.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -14,6 +16,7 @@ class Tree extends BaseClass {
       this.location,
       this.scientificName,
       this.commonName,
+      this.coordinates,
       this.girth,
       this.height})
       : super(
@@ -36,6 +39,8 @@ class Tree extends BaseClass {
   String girth;
   @JsonKey(name: 'height')
   String height;
+  @JsonKey(name: 'coordinates')
+  String coordinates;
 
   /// A necessary factory constructor for creating a new `Trees` instance
   /// from a map. Pass the map to the generated `_$TreesFromJson` constructor.

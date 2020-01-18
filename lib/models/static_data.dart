@@ -16,7 +16,7 @@ class StaticData with ChangeNotifier {
       Tree temp = Tree();
       temp = Tree.fromJson(object);
       temp.id = key;
-
+      print(temp.coordinates);
       listOfTree.add(temp);
       mapOfTree[key] = temp;
     });
