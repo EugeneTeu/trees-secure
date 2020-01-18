@@ -1,10 +1,18 @@
 # tree_secure
 
-A new Flutter project.
+A Flutter project to SECURE TREES IN SINGAPORE by CsPrayers 
 
-## Getting Started
+## Submission for Hack and Roll 2020
 
-This project is a starting point for a Flutter application.
+### Developers
+
+##### Aaron Choo 
+
+##### Li Ziying
+
+##### Wei Liang
+
+##### Eugene Teu 
 
 A few resources to get you started if this is your first Flutter project:
 
