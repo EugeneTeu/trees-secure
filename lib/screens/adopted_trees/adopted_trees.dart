@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
@@ -65,6 +66,10 @@ class _AdoptedTreesState extends State<AdoptedTrees>
                       child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        Icon(
+                          LineIcons.bitcoin,
+                          size: 300,
+                        ),
                         Text(
                           "You have not adopted any trees!",
                           style: TextStyle(fontSize: 24.0),

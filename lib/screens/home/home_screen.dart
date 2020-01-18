@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (_) => UserList(Provider.of<User>(context),
           Provider.of<StaticData>(context).mapOfTree),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
         home: Scaffold(
           key: _scaffoldKey,
@@ -85,12 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ],
-                ),
-                ListTile(
-                  title: FlatButton(
-                    child: Text('SIGN OUT'),
-                    onPressed: () => _auth.signOut(),
-                  ),
                 ),
                 ListTile(
                   onTap: () {
