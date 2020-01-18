@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "678525605998",
+    "firebase_url": "https://trees-c6afa.firebaseio.com",
+    "project_id": "trees-c6afa",
+    "storage_bucket": "trees-c6afa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678525605998:android:38633d857e2788e89aae7f",
+        "android_client_info": {
+          "package_name": "com.example.tree_secure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678525605998-tq363aqtbtehrd17jvedufkus3o1186l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn5d9WVjPimwCut_sNgpIWe4QEMbxL8gA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678525605998-tq363aqtbtehrd17jvedufkus3o1186l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
