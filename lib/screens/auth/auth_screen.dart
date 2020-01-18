@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:tree_secure/screens/auth/sign_in.dart';
 import 'package:tree_secure/screens/auth/register.dart';
+import 'package:tree_secure/screens/tree_secure_logo.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -19,10 +20,11 @@ class _AuthScreenState extends State<AuthScreen> {
     Widget view = this.showSignIn ? SignIn(toggleView) : Register(toggleView);
 
     return Scaffold(
+      /*
       appBar: AppBar(
         title: Text('Tree Secure'),
         centerTitle: true,
-      ),
+      ),*/
       body: Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 20),
@@ -31,6 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                TreeSecureLogo(),
                 view,
               ],
             ),

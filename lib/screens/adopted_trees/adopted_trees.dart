@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
