@@ -15,7 +15,11 @@ for x in f:
     t = x[b+len('coordinates')+3:]
     c = t.find(']')
     q = t[:c+1]
-    values.append((url, q))
+    m = json.loads(q)
+    n = []
+    n.append(m[1])
+    n.append(m[0])
+    values.append((url, str(n)))
   
 f.close()
 
@@ -30,6 +34,7 @@ def scrape(link, coordinates):
   t1 = html[a1+len('<div class="column description">'):]
   a2 = t1.find('</div>')
   description = (t1[:a2].strip())[3:-4].replace('<br>', ' ')
+  description.replace(r'\r\n', ' ')
 
   a3 = t1.find('<div class="aside-info-block">')
   t2 = t1[a3+len('<div class="aside-info-block">'):]
@@ -79,14 +84,12 @@ def scrape(link, coordinates):
     'link': link,
     'coordinates': coordinates,
     'description': description,
-    'location:': location,
-    'scientific_name:': scientific_name,
-    'common_name:': common_name,
-    'girth:': girth,
+    'location': location,
+    'scientific_name': scientific_name,
+    'common_name': common_name,
+    'girth': girth,
     'height': height
   }
-
-# scrape('https://www.nparks.gov.sg/gardens-parks-and-nature/heritage-trees/ht-2015-235')
 
 for (url, coor) in values:
   print(url)
