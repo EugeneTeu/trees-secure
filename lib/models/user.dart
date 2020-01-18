@@ -12,6 +12,7 @@ class User extends BaseClass {
     this.location,
     this.adoptedTrees,
     this.visitedTrees,
+    this.isDarkTheme,
   }) : super(
           id: id,
           createdAt: createdAt,
@@ -26,6 +27,8 @@ class User extends BaseClass {
   List<String> adoptedTrees;
   @JsonKey(name: 'visited_trees')
   List<String> visitedTrees;
+  @JsonKey(name: 'is_dark_theme')
+  bool isDarkTheme;
 
   /// A necessary factory constructor for creating a new `User` instance
   /// from a map. Pass the map to the generated `_$UserFromJson` constructor.

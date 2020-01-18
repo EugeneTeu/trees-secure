@@ -1,6 +1,6 @@
 import requests, json
 
-urls = []
+values = []
 
 f = open('heritage-trees-geojson.geojson', 'r')
 for x in f:
@@ -11,10 +11,17 @@ for x in f:
   link = t2[20:]
   url = link.replace('\/', '/')
   if len(url) > 0:
-    urls.append(url)
+    b = x.find('coordinates')
+    t = x[b+len('coordinates')+3:]
+    c = t.find(']')
+    q = t[:c+1]
+    values.append((url, q))
+  
 f.close()
 
-def scrape(link):
+trees = {}
+
+def scrape(link, coordinates):
   r = requests.get(url=link)
 
   html = r.content.decode()
@@ -68,28 +75,23 @@ def scrape(link):
   a22 = t12.find('</dd>')
   height = t12[:a22].strip()
 
-  return {
-    'Link': link,
-    'Description': description,
-    'UID': uid,
-    'Location:': location,
-    'Scientific name:': scientific_name,
-    'Common name:': common_name,
-    'Girth:': girth,
-    'Height': height
+  trees[uid] = {
+    'link': link,
+    'coordinates': coordinates,
+    'description': description,
+    'location:': location,
+    'scientific_name:': scientific_name,
+    'common_name:': common_name,
+    'girth:': girth,
+    'height': height
   }
 
-trees = []
-data = {
-  'trees': trees
-}
+# scrape('https://www.nparks.gov.sg/gardens-parks-and-nature/heritage-trees/ht-2015-235')
 
-scrape('https://www.nparks.gov.sg/gardens-parks-and-nature/heritage-trees/ht-2015-235')
+for (url, coor) in values:
+  print(url)
+  scrape(url, coor)
 
-# for url in urls:
-#   print(url)
-#   trees.append(scrape(url))
-
-# k = open('trees.json', 'w', encoding='utf-8')
-# json.dump(data, k, ensure_ascii=False, indent=4)
-# k.close()
+k = open('trees2.json', 'w', encoding='utf-8')
+json.dump(trees, k, ensure_ascii=False, indent=4)
+k.close()

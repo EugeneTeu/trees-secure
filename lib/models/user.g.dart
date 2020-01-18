@@ -16,6 +16,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
         (json['adopted_trees'] as List)?.map((e) => e as String)?.toList(),
     visitedTrees:
         (json['visited_trees'] as List)?.map((e) => e as String)?.toList(),
+    isDarkTheme: json['is_dark_theme'] as bool,
   )..name = json['name'] as String;
 }
 
@@ -35,5 +36,6 @@ Map<String, dynamic> _$UserToJson(User instance) {
   val['location'] = instance.location;
   val['adopted_trees'] = instance.adoptedTrees;
   val['visited_trees'] = instance.visitedTrees;
+  val['is_dark_theme'] = instance.isDarkTheme;
   return val;
 }
