@@ -37,7 +37,7 @@ ThemeData buildDarkTheme() {
     primaryColorDark: Colors.green[500],
     accentColor: Colors.green[400],
     scaffoldBackgroundColor: Colors.black,
-    dialogBackgroundColor: Colors.black,
+    dialogBackgroundColor: Colors.grey[900],
     textTheme: TextTheme(
       body1: TextStyle(
         color: Colors.white,

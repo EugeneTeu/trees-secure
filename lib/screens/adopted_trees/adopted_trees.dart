@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/models/user.dart';
+import 'package:tree_secure/screens/tree_view/tree_view.dart';
 import 'package:tree_secure/shared/loading_spinner.dart';
 
 class AdoptedTrees extends StatefulWidget {
@@ -15,31 +17,15 @@ class AdoptedTrees extends StatefulWidget {
 class _AdoptedTreesState extends State<AdoptedTrees>
     with AutomaticKeepAliveClientMixin {
   final List<Widget> listOfAdoptedTrees = [];
-  final List<Tree> listOfTree = [];
+  List<Tree> listOfTree = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    isLoading = true;
-    //load from provider here
-    loadTreeFromJson().then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    });
   }
 
-  loadTreeFromJson() async {
-    String data = await rootBundle.loadString("assets/trees.json");
-    Map<String, dynamic> jsonResult = json.decode(data);
-    jsonResult.forEach((String key, dynamic object) {
-      Tree temp = Tree();
-      temp = Tree.fromJson(object);
-      temp.id = key;
-      listOfTree.add(temp);
-    });
-
+  initTrees(BuildContext context) {
     listOfTree.forEach((tree) {
       var temp = ListTile(
           contentPadding:
@@ -58,18 +44,46 @@ class _AdoptedTreesState extends State<AdoptedTrees>
               Text(" ${tree.id}", style: TextStyle(color: Colors.black))
             ],
           ),
-          trailing: Icon(Icons.keyboard_arrow_right,
-              color: Colors.black, size: 30.0));
+          trailing: IconButton(
+            onPressed: () {
+              _showTreeDialog(context, tree);
+            },
+            icon: Icon(Icons.keyboard_arrow_right,
+                color: Colors.black, size: 30.0),
+          ));
       listOfAdoptedTrees.add(temp);
     });
-    print(listOfTree[0].toJson());
+  }
+
+  void _showTreeDialog(BuildContext context, Tree tree) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return Theme(
+          data: Theme.of(context),
+          child: Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            elevation: 0.0,
+            child: TreeView(tree),
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<User>(context);
-
     super.build(context);
+
+    final User user = Provider.of<User>(context);
+    final StaticData data = Provider.of<StaticData>(context);
+
+    listOfTree = data.listOfTree;
+
+    initTrees(context);
+
     return Card(
       elevation: 32.0,
       child: isLoading
@@ -80,6 +94,18 @@ class _AdoptedTreesState extends State<AdoptedTrees>
               children: <Widget>[
                 SizedBox(height: 8.0),
                 Row(),
+                ListTile(
+                  enabled: true,
+                  title: Text("Refresh"),
+                  trailing: IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: () {
+                      setState(() {
+                        initTrees(context);
+                      });
+                    },
+                  ),
+                ),
                 ListTile(
                   enabled: true,
                   title: Text("Number of Trees Visited:"),
@@ -93,17 +119,19 @@ class _AdoptedTreesState extends State<AdoptedTrees>
                 Text("These are your adopted Trees"),
                 SizedBox(height: 8.0),
                 Container(
-                  height: MediaQuery.of(context).size.height / 3 * 2,
-                  child: ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    cacheExtent: 20.0,
-                    shrinkWrap: true,
-                    itemCount: 255,
-                    itemBuilder: (BuildContext context, int index) {
-                      return listOfAdoptedTrees[index];
-                    },
-                  ),
+                  height: MediaQuery.of(context).size.height / 4 * 2.45,
+                  child: listOfAdoptedTrees.length == 0
+                      ? Text("error")
+                      : ListView.builder(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          cacheExtent: 20.0,
+                          shrinkWrap: true,
+                          itemCount: 255,
+                          itemBuilder: (BuildContext context, int index) {
+                            return listOfAdoptedTrees[index];
+                          },
+                        ),
                 )
               ],
             ),

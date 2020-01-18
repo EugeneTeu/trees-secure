@@ -82,6 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               ListTile(
+                title: FlatButton(
+                  child: Text('SIGN OUT'),
+                  onPressed: () => _auth.signOut(),
+                ),
+              ),
+              ListTile(
                 onTap: () {
                   _onChangePage(0);
                 },
