@@ -24,6 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
     VisitedTrees(),
     SettingsPage()
   ];
+  List<Widget> pageTitle = [
+    Text('Adopted Trees'),
+    Text('Discover Trees'),
+    Text('Visited Trees')
+  ];
 
   int index = 0;
 
@@ -64,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 IconButton(
                   icon: Icon(Icons.settings),
                   onPressed: () {
-                    print('test');
                     _onChangePage(3);
                   },
                 ),
@@ -95,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        title: Text('#TeamTrees'),
+        title: pageTitle[index],
         actions: <Widget>[],
       ),
       body: pages[index],

@@ -14,6 +14,8 @@
 	<string>tree_secure</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>io.flutter.embedded_views_preview</key>
+	<string>yes</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
