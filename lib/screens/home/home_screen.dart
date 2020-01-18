@@ -91,12 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
               selected: 2 == index,
               title: Text('Visited Trees'),
             ),
-            ListTile(
-              onTap: () {
-                this._auth.signOut();
-              },
-              title: Text('Logout'),
-            )
           ],
         ),
       ),

@@ -51,4 +51,10 @@ class FirestoreService {
       'visited_trees': [],
     });
   }
+
+  void setUserDisplayName(String name) {
+    this.userDocument.updateData({
+      'name': name,
+    });
+  }
 }
