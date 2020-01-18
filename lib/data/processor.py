@@ -18,9 +18,13 @@ def analyse(page):
     page['image'] = None
 
   # Get description
-  temp_description = soup.find(class_="column description")
-  description = BeautifulSoup(str(temp_description), 'html.parser').get_text(" ", strip=True)
-  page['description'] = description
+  try:
+    temp_description = soup.find(class_="column description")
+    description = BeautifulSoup(str(temp_description), 'html.parser').get_text(" ", strip=True)
+    page['description'] = description
+  except:
+    page['description'] = "N/A"
+  
 
   side_info = soup.find_all(class_="aside-info-block")
 
@@ -38,7 +42,7 @@ def analyse(page):
     location = BeautifulSoup(str(temp_location), 'html.parser').get_text("", strip=True).replace('Location', '').replace('Get Directions', '')
     page['location'] = location
   except:
-    page['location'] = None
+    page['location'] = "N/A"
 
   # Get scientific name, common name, girth, height
   try:
@@ -51,34 +55,34 @@ def analyse(page):
       scientific_name = details[index + 1]
       page['scientific_name'] = scientific_name
     except:
-      page['scientific_name'] = None
+      page['scientific_name'] = "N/A"
 
     try:
       index = details.index('Common name')
       common_name = details[index + 1]
       page['common_name'] = common_name
     except:
-      page['common_name'] = None
+      page['common_name'] = "N/A"
 
     try:
       index = details.index('Girth')
       girth = details[index + 1]
       page['girth'] = girth
     except:
-      page['girth'] = None
+      page['girth'] = "N/A"
 
     try:
       index = details.index('Height')
       height = details[index + 1]
       page['height'] = height
     except:
-      page['height'] = None
+      page['height'] = "N/A"
 
   except:
-    page['scientific_name'] = None
-    page['common_name'] = None
-    page['girth'] = None
-    page['height'] = None
+    page['scientific_name'] = "N/A"
+    page['common_name'] = "N/A"
+    page['girth'] = "N/A"
+    page['height'] = "N/A"
 
   return page
 
@@ -91,17 +95,18 @@ data = {}
 
 for tree in trees:
   datum = {}
-  datum['link'] = tree['url']
-  datum['coordinates'] = tree['coordinates']
-  datum['image'] = tree['image']
-  datum['description'] = tree['description']
-  datum['location'] = tree['location']
-  datum['scientific_name'] = tree['scientific_name']
-  datum['common_name'] = tree['common_name']
-  datum['girth'] = tree['girth']
-  datum['height'] = tree['height']
   uid = tree['uid']
-  data[uid] = datum
+  if (uid is not None):
+    datum['link'] = tree['url']
+    datum['coordinates'] = tree['coordinates']
+    datum['image'] = tree['image']
+    datum['description'] = tree['description']
+    datum['location'] = tree['location']
+    datum['scientific_name'] = tree['scientific_name']
+    datum['common_name'] = tree['common_name']
+    datum['girth'] = tree['girth']
+    datum['height'] = tree['height']
+    data[uid] = datum
 
 o = open('trees.json', 'w', encoding='utf-8')
 json.dump(data, o, ensure_ascii=False, indent=4)
