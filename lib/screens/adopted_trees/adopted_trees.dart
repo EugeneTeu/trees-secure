@@ -31,14 +31,18 @@ class _AdoptedTreesState extends State<AdoptedTrees>
           ),
           Text("These are your adopted Trees"),
           SizedBox(height: 8.0),
-          /*
-      SingleChildScrollView(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return listOfAdoptedTrees[index];
-          },
-        ),
-      )*/
+          Container(
+            width: 200,
+            height: MediaQuery.of(context).size.height / 2,
+            child: SingleChildScrollView(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return listOfAdoptedTrees[index];
+                },
+              ),
+            ),
+          )
         ],
       ),
     );
