@@ -14,7 +14,8 @@ class Tree extends BaseClass {
       this.location,
       this.scientificName,
       this.girth,
-      this.height})
+      this.height,
+      this.description})
       : super(
           id: id,
           createdAt: createdAt,
@@ -33,6 +34,8 @@ class Tree extends BaseClass {
   String girth;
   @JsonKey(name: 'height')
   String height;
+  @JsonKey(name: 'description')
+  String description;
 
   /// A necessary factory constructor for creating a new `Trees` instance
   /// from a map. Pass the map to the generated `_$TreesFromJson` constructor.
