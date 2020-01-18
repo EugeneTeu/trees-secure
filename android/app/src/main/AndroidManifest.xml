@@ -10,6 +10,11 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="tree_secure"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- google maps API -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCn5d9WVjPimwCut_sNgpIWe4QEMbxL8gA"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -30,4 +35,6 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>
