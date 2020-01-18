@@ -89,8 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 selected: 0 == index,
                 title: Text(
                   'Discover Trees',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 17),
                 ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
               ListTile(
                 onTap: () {
@@ -99,8 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 selected: 1 == index,
                 title: Text(
                   'Adopted Trees',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 17),
                 ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
               ListTile(
                 onTap: () {
@@ -109,8 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 selected: 2 == index,
                 title: Text(
                   'Visited Trees',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 17),
                 ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
             ],
           ),
