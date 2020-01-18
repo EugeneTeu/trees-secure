@@ -8,7 +8,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tree-secure',
       theme: ThemeData(
-          primarySwatch: Colors.green[800], accentColor: Colors.green[700]),
+        primarySwatch: Colors.green,
+        accentColor: Colors.green[700],
+      ),
       home: MyHomePage(title: 'Tree-Secure'),
     );
   }
