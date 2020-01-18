@@ -9,33 +9,33 @@ class Tree extends BaseClass {
       {String id,
       DateTime createdAt,
       DateTime modifiedAt,
-      this.commonName,
-      this.uuid,
+      this.link,
+      this.description,
       this.location,
       this.scientificName,
+      this.commonName,
       this.girth,
-      this.height,
-      this.description})
+      this.height})
       : super(
           id: id,
           createdAt: createdAt,
           modifiedAt: modifiedAt,
         );
 
-  @JsonKey(name: 'common_name')
-  String commonName;
-  @JsonKey(name: 'uuid')
-  String uuid;
+  @JsonKey(name: 'link')
+  String link;
+  @JsonKey(name: 'description')
+  String description;
   @JsonKey(name: 'location')
   String location;
   @JsonKey(name: 'scientific_name')
   String scientificName;
+  @JsonKey(name: 'common_name')
+  String commonName;
   @JsonKey(name: 'girth')
   String girth;
   @JsonKey(name: 'height')
   String height;
-  @JsonKey(name: 'description')
-  String description;
 
   /// A necessary factory constructor for creating a new `Trees` instance
   /// from a map. Pass the map to the generated `_$TreesFromJson` constructor.
