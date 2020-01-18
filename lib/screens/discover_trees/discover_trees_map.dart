@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:tree_secure/models/user.dart';
 import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
+import 'package:tree_secure/screens/tree_view/tree_view.dart';
 
 class DiscoverTreesMap extends StatefulWidget {
   @override
@@ -41,19 +42,8 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
           position: LatLng(coordinates[0], coordinates[1]),
           infoWindow: InfoWindow(
             title: tree.commonName,
-            // snippet: tree.description,
+            snippet: 'Tap for more information',
           ),
-          onTap: () {
-            // Scaffold.of(context).showBottomSheet((context) {
-            //   return Container(
-            //     height: 250,
-            //     width: double.infinity,
-            //     child: Center(
-            //       child: Text(tree.id),
-            //     ),
-            //   );
-            // });
-          },
         ),
       );
     });
