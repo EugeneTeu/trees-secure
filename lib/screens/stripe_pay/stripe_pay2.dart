@@ -3,12 +3,12 @@ import 'package:stripe_payment/stripe_payment.dart';
 import 'dart:io';
 import 'dart:convert';
 
-class StripePay extends StatefulWidget {
+class StripePay2 extends StatefulWidget {
   @override
-  _StripePayState createState() => _StripePayState();
+  _StripePay2State createState() => _StripePay2State();
 }
 
-class _StripePayState extends State<StripePay> {
+class _StripePay2State extends State<StripePay2> {
   Token _paymentToken;
   PaymentMethod _paymentMethod;
   String _error;
@@ -89,20 +89,6 @@ class _StripePayState extends State<StripePay> {
             ),
             Divider(),
             RaisedButton(
-              child: Text("Create Token with Card Form"),
-              onPressed: () {
-                StripePayment.paymentRequestWithCardForm(
-                        CardFormPaymentRequest())
-                    .then((paymentMethod) {
-                  _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(content: Text('Received ${paymentMethod.id}')));
-                  setState(() {
-                    _paymentMethod = paymentMethod;
-                  });
-                }).catchError(setError);
-              },
-            ),
-            RaisedButton(
               child: Text("Create Token with Card"),
               onPressed: () {
                 StripePayment.createTokenWithCard(
@@ -156,21 +142,23 @@ class _StripePayState extends State<StripePay> {
             Divider(),
             RaisedButton(
               child: Text("Confirm Payment Intent"),
-              onPressed: () {
-                StripePayment.confirmPaymentIntent(
-                  PaymentIntent(
-                    clientSecret: _currentSecret,
-                    paymentMethodId: _paymentMethod.id,
-                  ),
-                ).then((paymentIntent) {
-                  _scaffoldKey.currentState.showSnackBar(SnackBar(
-                      content:
-                          Text('Received ${paymentIntent.paymentIntentId}')));
-                  setState(() {
-                    _paymentIntent = paymentIntent;
-                  });
-                }).catchError(setError);
-              },
+              onPressed: _paymentMethod == null || _currentSecret == null
+                  ? null
+                  : () {
+                      StripePayment.confirmPaymentIntent(
+                        PaymentIntent(
+                          clientSecret: _currentSecret,
+                          paymentMethodId: _paymentMethod.id,
+                        ),
+                      ).then((paymentIntent) {
+                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text(
+                                'Received ${paymentIntent.paymentIntentId}')));
+                        setState(() {
+                          _paymentIntent = paymentIntent;
+                        });
+                      }).catchError(setError);
+                    },
             ),
             RaisedButton(
               child: Text("Authenticate Payment Intent"),
@@ -263,77 +251,4 @@ class _StripePayState extends State<StripePay> {
       ),
     );
   }
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height / 2,
-          width: 300,
-          child: Column(
-            children: <Widget>[
-              RaisedButton(
-                  child: Text("add card"),
-                  onPressed: () {
-                    StripePayment.paymentRequestWithCardForm(
-                            CardFormPaymentRequest())
-                        .catchError((e) {
-                      print('ERROR ${e.toString()}');
-                    }).then((paymentMethod) {
-                      _paymentToken.tokenId = paymentMethod.id;
-                      //DO SOMETHING WITH YOUR PAYMENT METHOD
-                    });
-                  }),
-              RaisedButton(
-                onPressed: () {
-                  StripePayment.createSourceWithParams(SourceParams(
-                    type: 'ideal',
-                    amount: 1099,
-                    currency: 'eur',
-                    returnURL: 'example://stripe-redirect',
-                  )).then((source) {
-                    _scaffoldKey.currentState.showSnackBar(
-                        SnackBar(content: Text('Received ${source.sourceId}')));
-                    setState(() {
-                      _source = source;
-                    });
-                  }).catchError(setError);
-                },
-              ),
-              RaisedButton(
-                child: Text("Native payment"),
-                onPressed: () {
-                  print("Test");
-                  StripePayment.paymentRequestWithNativePay(
-                    androidPayOptions: AndroidPayPaymentRequest(
-                      total_price: "1.20",
-                      currency_code: "EUR",
-                    ),
-                    applePayOptions: ApplePayPaymentOptions(
-                      countryCode: 'DE',
-                      currencyCode: 'EUR',
-                      items: [
-                        ApplePayItem(
-                          label: 'Test',
-                          amount: '1.00',
-                        )
-                      ],
-                    ),
-                  ).then((token) {
-                    setState(() {
-                      _scaffoldKey.currentState.showSnackBar(
-                          SnackBar(content: Text('Received ${token.tokenId}')));
-                      _paymentToken = token;
-                    });
-                  }).catchError(setError);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }*/
-
 }
