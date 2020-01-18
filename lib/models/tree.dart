@@ -1,9 +1,9 @@
 import 'package:tree_secure/models/base_class.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-//part 'trees.g.dart';
+part 'tree.g.dart';
 
-@JsonSerializable(includeIfNull: false, nullable: true)
+@JsonSerializable()
 class Tree extends BaseClass {
   Tree(
       {String id,
@@ -37,10 +37,10 @@ class Tree extends BaseClass {
   /// A necessary factory constructor for creating a new `Trees` instance
   /// from a map. Pass the map to the generated `_$TreesFromJson` constructor.
   /// The constructor is named after the source class, in this case, `Trees`.
-  factory Trees.fromJson(Map<String, dynamic> json) => _$TreesFromJson(json);
+  factory Tree.fromJson(Map<String, dynamic> json) => _$TreeFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
   /// to JSON. The implementation simply calls the private, generated
   /// helper method `_$TreesToJson`.
-  Map<String, dynamic> toJson() => _$TreesToJson(this);
+  Map<String, dynamic> toJson() => _$TreeToJson(this);
 }
