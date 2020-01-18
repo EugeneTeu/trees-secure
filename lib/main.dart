@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: buildLightTheme(),
+        theme: buildDarkTheme(),
         home: AuthWrapper(),
       ),
     );
