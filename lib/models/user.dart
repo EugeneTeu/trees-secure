@@ -5,14 +5,14 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User extends BaseClass {
-  User(
-      {String id,
-      DateTime createdAt,
-      DateTime modifiedAt,
-      this.uuid,
-      this.location,
-      this.adoptedTrees})
-      : super(
+  User({
+    String id,
+    DateTime createdAt,
+    DateTime modifiedAt,
+    this.location,
+    this.adoptedTrees,
+    this.visitedTrees,
+  }) : super(
           id: id,
           createdAt: createdAt,
           modifiedAt: modifiedAt,
@@ -20,12 +20,12 @@ class User extends BaseClass {
 
   @JsonKey(name: 'name')
   String name;
-  @JsonKey(name: 'uuid')
-  String uuid;
   @JsonKey(name: 'location')
   String location;
   @JsonKey(name: 'adopted_trees')
   List<String> adoptedTrees;
+  @JsonKey(name: 'visited_trees')
+  List<String> visitedTrees;
 
   /// A necessary factory constructor for creating a new `User` instance
   /// from a map. Pass the map to the generated `_$UserFromJson` constructor.

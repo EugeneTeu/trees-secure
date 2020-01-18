@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:tree_secure/Themes/theme.dart';
+
+import 'package:tree_secure/themes/theme.dart';
 import 'package:tree_secure/screens/wrappers/auth_wrapper.dart';
 import 'package:tree_secure/services/auth_service.dart';
 import 'package:tree_secure/models/auth_user.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: buildDarkTheme(),
+        theme: buildLightTheme(),
         home: AuthWrapper(),
       ),
     );

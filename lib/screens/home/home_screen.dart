@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
 import 'package:tree_secure/screens/discover_trees/discover_trees.dart';
+import 'package:tree_secure/screens/splash/splash_screen.dart';
 import 'package:tree_secure/screens/visited_trees/visited_trees.dart';
-
 import 'package:tree_secure/services/auth_service.dart';
+import 'package:tree_secure/models/user.dart';
+import 'package:tree_secure/models/auth_user.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,54 +23,63 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final User user = Provider.of<User>(context);
+    final AuthUser authUser = Provider.of<AuthUser>(context);
+
+    if (user == null) {
+      return SplashScreen();
+    }
+
     return Scaffold(
       drawer: Drawer(
-          child: ListView(
-        padding: const EdgeInsets.all(0.0),
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            margin: const EdgeInsets.all(0.0),
-            currentAccountPicture: CircleAvatar(
-              radius: 30.0,
-              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-              backgroundColor: Colors.transparent,
+        child: ListView(
+          padding: const EdgeInsets.all(0.0),
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              margin: const EdgeInsets.all(0.0),
+              currentAccountPicture: CircleAvatar(
+                radius: 30.0,
+                backgroundImage:
+                    NetworkImage('https://via.placeholder.com/150'),
+                backgroundColor: Colors.transparent,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              accountName: Text(user.name),
+              accountEmail: Text(authUser.user.email),
             ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+            ListTile(
+              onTap: () {
+                _onChangePage(0);
+              },
+              selected: 0 == index,
+              title: Text('Adopted Trees'),
             ),
-            accountName: Text("user account name"),
-            accountEmail: Text("user account email"),
-          ),
-          ListTile(
-            onTap: () {
-              _onChangePage(0);
-            },
-            selected: 0 == index,
-            title: Text('Adopted Trees'),
-          ),
-          ListTile(
-            onTap: () {
-              _onChangePage(1);
-            },
-            selected: 1 == index,
-            title: Text('Discover Trees'),
-          ),
-          ListTile(
-            onTap: () {
-              _onChangePage(2);
-            },
-            selected: 2 == index,
-            title: Text('Visited Trees'),
-          ),
-          ListTile(
-            onTap: () {
-              this._auth.signOut();
-              Navigator.of(context).pop();
-            },
-            title: Text('Logout'),
-          )
-        ],
-      )),
+            ListTile(
+              onTap: () {
+                _onChangePage(1);
+              },
+              selected: 1 == index,
+              title: Text('Discover Trees'),
+            ),
+            ListTile(
+              onTap: () {
+                _onChangePage(2);
+              },
+              selected: 2 == index,
+              title: Text('Visited Trees'),
+            ),
+            ListTile(
+              onTap: () {
+                this._auth.signOut();
+                Navigator.of(context).pop();
+              },
+              title: Text('Logout'),
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text('# Team Trees'),
         actions: <Widget>[],

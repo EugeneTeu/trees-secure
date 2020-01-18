@@ -5,6 +5,8 @@ import 'package:tree_secure/screens/auth/auth_screen.dart';
 import 'package:tree_secure/screens/home/home_screen.dart';
 import 'package:tree_secure/models/auth_user.dart';
 import 'package:tree_secure/screens/splash/splash_screen.dart';
+import 'package:tree_secure/services/firestore_service.dart';
+import 'package:tree_secure/models/user.dart';
 
 class AuthWrapper extends StatelessWidget {
   @override
@@ -19,7 +21,11 @@ class AuthWrapper extends StatelessWidget {
       return AuthScreen();
     } else {
       // UserModel is ok; user is authenticated successfully
-      return HomeScreen();
+      FirestoreService.initInstance(uid: authUser.uid);
+      return StreamProvider<User>.value(
+        value: FirestoreService.instance.currUser,
+        child: HomeScreen(),
+      );
     }
   }
 }
