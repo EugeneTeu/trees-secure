@@ -22,19 +22,19 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<Widget> pages = [
-    AdoptedTrees(),
     DiscoverTreesMap(),
+    AdoptedTrees(),
     VisitedTrees(),
     SettingsPage()
   ];
   List<Widget> pageTitle = [
-    Text('Adopted Trees'),
     Text('Discover Trees'),
+    Text('Adopted Trees'),
     Text('Visited Trees'),
     Text('Settings'),
   ];
 
-  int index = 2;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -82,31 +82,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               ListTile(
-                title: FlatButton(
-                  child: Text('SIGN OUT'),
-                  onPressed: () => _auth.signOut(),
-                ),
-              ),
-              ListTile(
                 onTap: () {
                   _onChangePage(0);
                 },
                 selected: 0 == index,
-                title: Text('Adopted Trees'),
+                title: Text(
+                  'Discover Trees',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
               ListTile(
                 onTap: () {
                   _onChangePage(1);
                 },
                 selected: 1 == index,
-                title: Text('Discover Trees'),
+                title: Text(
+                  'Adopted Trees',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
               ListTile(
                 onTap: () {
                   _onChangePage(2);
                 },
                 selected: 2 == index,
-                title: Text('Visited Trees'),
+                title: Text(
+                  'Visited Trees',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ],
           ),
