@@ -31,17 +31,11 @@ class _AdoptedTreesState extends State<AdoptedTrees>
   }
 
   loadTreeFromJson() async {
-    String data = await rootBundle.loadString("assets/trees2.json");
+    String data = await rootBundle.loadString("assets/trees.json");
     Map<String, dynamic> jsonResult = json.decode(data);
     jsonResult.forEach((String key, dynamic object) {
       Tree temp = Tree();
-      temp.link = object['link'];
-      temp.commonName = object['common_name:'];
-      temp.girth = object['girth:'];
-      temp.location = object['location:'];
-      temp.scientificName = object["scientific_name:"];
-      temp.description = object['description'];
-      temp.height = object['height'];
+      temp = Tree.fromJson(object);
       temp.id = key;
       listOfTree.add(temp);
     });
@@ -68,6 +62,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
               color: Colors.black, size: 30.0));
       listOfAdoptedTrees.add(temp);
     });
+    print(listOfTree[0].toJson());
   }
 
   @override
@@ -75,43 +70,46 @@ class _AdoptedTreesState extends State<AdoptedTrees>
     final User user = Provider.of<User>(context);
 
     super.build(context);
-    return isLoading
-        ? LoadingSpinner()
-        : Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(height: 8.0),
-                Row(),
-                ListTile(
-                  enabled: true,
-                  title: Text("Number of Trees Visited:"),
-                  trailing: Text('${user.visitedTrees.length}'),
-                ),
-                ListTile(
-                  enabled: true,
-                  title: Text("Number of Trees Adopted:"),
-                  trailing: Text('${user.adoptedTrees.length}'),
-                ),
-                Text("These are your adopted Trees"),
-                SizedBox(height: 8.0),
-                Container(
-                  height: MediaQuery.of(context).size.height / 3 * 2,
-                  child: ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    cacheExtent: 20.0,
-                    shrinkWrap: true,
-                    itemCount: 255,
-                    itemBuilder: (BuildContext context, int index) {
-                      return listOfAdoptedTrees[index];
-                    },
+    return Card(
+      elevation: 32.0,
+      child: isLoading
+          ? LoadingSpinner()
+          : Scaffold(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(height: 8.0),
+                  Row(),
+                  ListTile(
+                    enabled: true,
+                    title: Text("Number of Trees Visited:"),
+                    trailing: Text('${user.visitedTrees.length}'),
                   ),
-                )
-              ],
+                  ListTile(
+                    enabled: true,
+                    title: Text("Number of Trees Adopted:"),
+                    trailing: Text('${user.adoptedTrees.length}'),
+                  ),
+                  Text("These are your adopted Trees"),
+                  SizedBox(height: 8.0),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 3 * 2,
+                    child: ListView.builder(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      cacheExtent: 20.0,
+                      shrinkWrap: true,
+                      itemCount: 255,
+                      itemBuilder: (BuildContext context, int index) {
+                        return listOfAdoptedTrees[index];
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
-          );
+    );
   }
 
   @override

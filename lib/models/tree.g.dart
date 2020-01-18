@@ -13,11 +13,11 @@ Tree _$TreeFromJson(Map<String, dynamic> json) {
     modifiedAt: BaseClass.convertTimestampToDateTime(json['modified_at']),
     link: json['link'] as String,
     description: json['description'] as String,
-    location: json['location:'] as String,
-    scientificName: json['scientific_name:'] as String,
-    commonName: json['common_name:'] as String,
-    girth: json['girth:'] as String,
-    height: json['height:'] as String,
+    location: json['location'] as String,
+    scientificName: json['scientific_name'] as String,
+    commonName: json['common_name'] as String,
+    girth: json['girth'] as String,
+    height: json['height'] as String,
   );
 }
 
@@ -35,10 +35,10 @@ Map<String, dynamic> _$TreeToJson(Tree instance) {
   writeNotNull('modified_at', BaseClass.setDateTime(instance.modifiedAt));
   val['link'] = instance.link;
   val['description'] = instance.description;
-  val['location:'] = instance.location;
-  val['scientific_name:'] = instance.scientificName;
-  val['common_name:'] = instance.commonName;
-  val['girth:'] = instance.girth;
-  val['height:'] = instance.height;
+  val['location'] = instance.location;
+  val['scientific_name'] = instance.scientificName;
+  val['common_name'] = instance.commonName;
+  val['girth'] = instance.girth;
+  val['height'] = instance.height;
   return val;
 }
