@@ -13,7 +13,7 @@ class UserList with ChangeNotifier {
   Map<String, Tree> mapOfTrees = Map();
   User user;
 
-  filterUserTree() {
+  void filterUserTree() {
     user.adoptedTrees.forEach((key) {
       Tree temp = mapOfTrees[key];
       listOfAdoptedTree.add(temp);
@@ -22,5 +22,16 @@ class UserList with ChangeNotifier {
       Tree temp = mapOfTrees[key];
       listOfVisitedTree.add(temp);
     });
+    notifyListeners();
+  }
+
+  void increaseAdoptTree(Tree tree) {
+    listOfAdoptedTree.add(tree);
+    notifyListeners();
+  }
+
+  void increaseVisitedTree(Tree tree) {
+    listOfVisitedTree.add(tree);
+    notifyListeners();
   }
 }

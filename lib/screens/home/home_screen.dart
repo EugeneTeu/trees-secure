@@ -4,7 +4,6 @@ import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/user_list.dart';
 
 import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
-import 'package:tree_secure/screens/discover_trees/discover_trees.dart';
 import 'package:tree_secure/screens/discover_trees/discover_trees_map.dart';
 import 'package:tree_secure/screens/settings_page/settings_page.dart';
 import 'package:tree_secure/screens/splash/splash_screen.dart';
@@ -24,19 +23,19 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<Widget> pages = [
-    AdoptedTrees(),
     DiscoverTreesMap(),
+    AdoptedTrees(),
     VisitedTrees(),
     SettingsPage()
   ];
   List<Widget> pageTitle = [
-    Text('Adopted Trees'),
     Text('Discover Trees'),
+    Text('Adopted Trees'),
     Text('Visited Trees'),
     Text('Settings'),
   ];
 
-  int index = 2;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
