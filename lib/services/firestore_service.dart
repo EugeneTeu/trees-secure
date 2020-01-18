@@ -64,8 +64,4 @@ class FirestoreService {
       'is_dark_theme': newBool,
     });
   }
-
-  String generateSecret() {
-    
-  }
 }

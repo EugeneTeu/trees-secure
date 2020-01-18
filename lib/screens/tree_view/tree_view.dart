@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tree_secure/models/tree.dart';
 
 class TreeView extends StatelessWidget {
-  TreeView(this.tree);
+  TreeView(this.tree, this.fromDiscoverScreen);
 
   final Tree tree;
+  final bool fromDiscoverScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class TreeView extends StatelessWidget {
         children: ListTile.divideTiles(
           context: context,
           tiles: [
+            Image.network(tree.image),
             ListTile(
               title: Text(tree.scientificName),
               subtitle: Text("Scientific Name"),
@@ -38,6 +40,25 @@ class TreeView extends StatelessWidget {
               title: Text(tree.location),
               subtitle: Text("Location Description"),
             ),
+            fromDiscoverScreen
+                ? ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        color: Colors.redAccent,
+                        child: Text("cancel"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Divider(),
+                      RaisedButton(
+                        child: Text("Adopt this tree!"),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )
+                : SizedBox.shrink()
           ],
         ).toList(),
       ),

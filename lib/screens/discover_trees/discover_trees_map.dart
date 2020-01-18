@@ -50,7 +50,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
                   return Theme(
                     data: Theme.of(context),
                     child: Dialog(
-                      child: TreeView(tree),
+                      child: TreeView(tree, true),
                     ),
                   );
                 },
