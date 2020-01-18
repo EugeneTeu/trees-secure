@@ -11,11 +11,14 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AuthUser>.value(
-      value: AuthService.instance.currUserModel,
+    return MultiProvider(
+      providers: [
+        StreamProvider<AuthUser>(
+            create: (context) => AuthService.instance.currUserModel)
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: buildLightTheme(),
+        theme: buildDarkTheme(),
         home: AuthWrapper(),
       ),
     );
