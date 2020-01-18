@@ -84,10 +84,12 @@ data = {
   'trees': trees
 }
 
-for url in urls:
-  print(url)
-  trees.append(scrape(url))
+scrape('https://www.nparks.gov.sg/gardens-parks-and-nature/heritage-trees/ht-2015-235')
 
-k = open('trees.json', 'w', encoding='utf-8')
-json.dump(data, k, ensure_ascii=False, indent=4)
-k.close()
+# for url in urls:
+#   print(url)
+#   trees.append(scrape(url))
+
+# k = open('trees.json', 'w', encoding='utf-8')
+# json.dump(data, k, ensure_ascii=False, indent=4)
+# k.close()
