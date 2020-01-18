@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Tree-secure',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+          primarySwatch: Colors.green[800], accentColor: Colors.green[700]),
+      home: MyHomePage(title: 'Tree-Secure'),
     );
   }
 }
