@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
-import 'package:tree_secure/models/user_list.dart';
 
 import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
 import 'package:tree_secure/screens/discover_trees/discover_trees_map.dart';
@@ -23,14 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<Widget> pages = [
-    DiscoverTreesMap(),
     AdoptedTrees(),
+    DiscoverTreesMap(),
     VisitedTrees(),
     SettingsPage()
   ];
   List<Widget> pageTitle = [
-    Text('Discover Trees'),
     Text('Adopted Trees'),
+    Text('Discover Trees'),
     Text('Visited Trees'),
     Text('Settings'),
   ];
@@ -52,70 +51,66 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    return (ChangeNotifierProvider<UserList>(
-      create: (_) => UserList(Provider.of<User>(context),
-          Provider.of<StaticData>(context).mapOfTree),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
-        home: Scaffold(
-          key: _scaffoldKey,
-          drawer: Drawer(
-            child: ListView(
-              padding: const EdgeInsets.all(0.0),
-              children: <Widget>[
-                UserAccountsDrawerHeader(
-                  margin: const EdgeInsets.all(0.0),
-                  currentAccountPicture: CircleAvatar(
-                    radius: 30.0,
-                    backgroundImage:
-                        NetworkImage('https://via.placeholder.com/150'),
-                    backgroundColor: Colors.transparent,
+    return (MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
+      home: Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer(
+          child: ListView(
+            padding: const EdgeInsets.all(0.0),
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                margin: const EdgeInsets.all(0.0),
+                currentAccountPicture: CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage:
+                      NetworkImage('https://via.placeholder.com/150'),
+                  backgroundColor: Colors.transparent,
+                ),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                ),
+                accountName: Text(user.name),
+                accountEmail: Text(authUser.user.email),
+                otherAccountsPictures: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () {
+                      _onChangePage(3);
+                    },
                   ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  accountName: Text(user.name),
-                  accountEmail: Text(authUser.user.email),
-                  otherAccountsPictures: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {
-                        _onChangePage(3);
-                      },
-                    ),
-                  ],
-                ),
-                ListTile(
-                  onTap: () {
-                    _onChangePage(0);
-                  },
-                  selected: 0 == index,
-                  title: Text('Adopted Trees'),
-                ),
-                ListTile(
-                  onTap: () {
-                    _onChangePage(1);
-                  },
-                  selected: 1 == index,
-                  title: Text('Discover Trees'),
-                ),
-                ListTile(
-                  onTap: () {
-                    _onChangePage(2);
-                  },
-                  selected: 2 == index,
-                  title: Text('Visited Trees'),
-                ),
-              ],
-            ),
+                ],
+              ),
+              ListTile(
+                onTap: () {
+                  _onChangePage(0);
+                },
+                selected: 0 == index,
+                title: Text('Adopted Trees'),
+              ),
+              ListTile(
+                onTap: () {
+                  _onChangePage(1);
+                },
+                selected: 1 == index,
+                title: Text('Discover Trees'),
+              ),
+              ListTile(
+                onTap: () {
+                  _onChangePage(2);
+                },
+                selected: 2 == index,
+                title: Text('Visited Trees'),
+              ),
+            ],
           ),
-          appBar: AppBar(
-            title: pageTitle[index],
-            actions: <Widget>[],
-          ),
-          body: pages[index],
         ),
+        appBar: AppBar(
+          title: pageTitle[index],
+          actions: <Widget>[],
+        ),
+        body: pages[index],
       ),
     ));
   }

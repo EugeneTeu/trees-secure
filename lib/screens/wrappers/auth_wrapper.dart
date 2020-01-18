@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
-import 'package:tree_secure/models/user_list.dart';
 
 import 'package:tree_secure/screens/auth/auth_screen.dart';
 import 'package:tree_secure/screens/home/home_screen.dart';
