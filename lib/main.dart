@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:tree_secure/themes/cs_prayer_theme.dart';
+import 'package:tree_secure/themes/theme.dart';
 
 import 'package:tree_secure/screens/wrappers/auth_wrapper.dart';
 import 'package:tree_secure/services/auth_service.dart';
@@ -9,7 +9,6 @@ import 'package:tree_secure/models/auth_user.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  static final CsPrayerTheme csPrayerTheme = CsPrayerTheme();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: csPrayerTheme.theme,
+        theme: buildLightTheme(),
         home: AuthWrapper(),
       ),
     );
