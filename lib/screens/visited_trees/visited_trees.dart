@@ -15,7 +15,7 @@ class VisitedTrees extends StatefulWidget {
 class _VisitedTreesState extends State<VisitedTrees>
     with AutomaticKeepAliveClientMixin {
   final List<Widget> listOfVisitedTrees = [];
-  List<Tree> listOfTree = [];
+
   bool isLoading = false;
   List<String> listOfUserVisited = [];
   Map<String, Tree> mapOfTrees = Map();
@@ -54,70 +54,68 @@ class _VisitedTreesState extends State<VisitedTrees>
     mapOfTrees = data.mapOfTree;
 
     print(listOfUserVisited);
+    
 
     return Card(
       elevation: 32.0,
-      child: isLoading
-          ? LoadingSpinner()
-          : Container(
-              height: MediaQuery.of(context).size.height - 32.0,
-              child: listOfTree.length == 0
-                  ? Center(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          LineIcons.wheelchair,
-                          size: 300.0,
-                        ),
-                        Text(
-                          "You have not visited any trees!",
-                          style: TextStyle(fontSize: 24.0),
-                        ),
-                        Text("Head over to Discover trees!",
-                            style: TextStyle(fontSize: 24.0))
-                      ],
-                    ))
-                  : ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      cacheExtent: 20.0,
-                      shrinkWrap: true,
-                      itemCount: listOfTree.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        Tree tempTree = listOfTree[index];
+      child: Container(
+        height: MediaQuery.of(context).size.height - 32.0,
+        child: listOfUserVisited.length == 0
+            ? Center(
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    LineIcons.wheelchair,
+                    size: 300.0,
+                  ),
+                  Text(
+                    "You have not visited any trees!",
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                  Text("Head over to Discover trees!",
+                      style: TextStyle(fontSize: 24.0))
+                ],
+              ))
+            : ListView.builder(
+                physics: AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                cacheExtent: 20.0,
+                shrinkWrap: true,
+                itemCount: listOfUserVisited.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String key = listOfUserVisited[index];
+                  Tree tempTree = mapOfTrees[key];
 
-                        return ListTile(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 10.0),
-                            title: Text("Tree: ${tempTree.commonName}"),
-                            leading: Container(
-                              padding: EdgeInsets.only(right: 12.0),
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border(right: BorderSide(width: 1.0))),
-                              child: Icon(
-                                LineIcons.tree,
-                                size: 50,
-                              ),
-                            ),
-                            subtitle: Row(
-                              children: <Widget>[
-                                Icon(Icons.terrain,
-                                    color: Theme.of(context).primaryColorDark),
-                                Text(" ${tempTree.id}", style: TextStyle())
-                              ],
-                            ),
-                            trailing: IconButton(
-                              onPressed: () {
-                                _showTreeDialog(context, tempTree);
-                              },
-                              icon:
-                                  Icon(Icons.keyboard_arrow_right, size: 30.0),
-                            ));
-                      },
-                    ),
-            ),
+                  return ListTile(
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      title: Text("Tree: ${tempTree.commonName}"),
+                      leading: Container(
+                        padding: EdgeInsets.only(right: 12.0),
+                        decoration: BoxDecoration(
+                            border: Border(right: BorderSide(width: 1.0))),
+                        child: Icon(
+                          LineIcons.tree,
+                          size: 50,
+                        ),
+                      ),
+                      subtitle: Row(
+                        children: <Widget>[
+                          Icon(Icons.terrain,
+                              color: Theme.of(context).primaryColorDark),
+                          Text(" ${tempTree.id}", style: TextStyle())
+                        ],
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          _showTreeDialog(context, tempTree);
+                        },
+                        icon: Icon(Icons.keyboard_arrow_right, size: 30.0),
+                      ));
+                },
+              ),
+      ),
     );
   }
 

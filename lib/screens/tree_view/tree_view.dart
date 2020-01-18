@@ -52,6 +52,7 @@ class TreeView extends StatelessWidget {
                         child: Text("Visit"),
                         onPressed: () {
                           this.fs.visitTree(tree.id);
+                          Navigator.of(context).pop();
                         },
                       ),
                       Divider(),

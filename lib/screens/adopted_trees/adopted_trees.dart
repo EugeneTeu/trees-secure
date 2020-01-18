@@ -16,7 +16,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
     with AutomaticKeepAliveClientMixin {
   final List<Widget> listOfAdoptedTrees = [];
   List<String> listOfUserAdapted = [];
-  List<Tree> listOfTree = [];
+
   Map<String, Tree> mapOfTrees = Map();
   bool isLoading = false;
 
@@ -59,7 +59,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
           ? LoadingSpinner()
           : Container(
               height: MediaQuery.of(context).size.height - 32.0,
-              child: listOfTree.length == 0
+              child: listOfUserAdapted.length == 0
                   ? Center(
                       child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
