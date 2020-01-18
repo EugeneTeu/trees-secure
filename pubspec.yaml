@@ -22,7 +22,18 @@ dependencies:
   
   firebase: any
   provider: any
+  geojson: 0.8.0
+
+  # To update the model serializer files, run this command:
+  # flutter pub run build_runner build
   
+  # IN CASE OF ERRORS RUN :
+  # flutter pub run build_runner build --delete-conflicting-outputs
+  
+  build_runner: ^1.7.1
+  json_serializable: ^3.2.3
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
