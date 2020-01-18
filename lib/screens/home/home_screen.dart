@@ -27,7 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> pageTitle = [
     Text('Adopted Trees'),
     Text('Discover Trees'),
-    Text('Visited Trees')
+    Text('Visited Trees'),
+    Text('Settings'),
   ];
 
   int index = 0;
