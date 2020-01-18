@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return MaterialApp(
-      theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
+      //theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
       home: Scaffold(
         key: _scaffoldKey,
         drawer: Drawer(
@@ -80,6 +80,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ],
+              ),
+              ListTile(
+                title: FlatButton(
+                  child: Text('SIGN OUT'),
+                  onPressed: () => _auth.signOut(),
+                ),
               ),
               ListTile(
                 onTap: () {
