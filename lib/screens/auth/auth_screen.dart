@@ -28,7 +28,12 @@ class _AuthScreenState extends State<AuthScreen> {
           padding: EdgeInsets.symmetric(vertical: 20),
           child: FractionallySizedBox(
             widthFactor: 0.9,
-            child: view,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                view,
+              ],
+            ),
           ),
         ),
       ),

@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/models/user.dart';
-import 'package:tree_secure/models/user_list.dart';
-import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
 import 'package:tree_secure/screens/tree_view/tree_view.dart';
 import 'package:tree_secure/shared/loading_spinner.dart';
 
@@ -19,6 +17,8 @@ class _VisitedTreesState extends State<VisitedTrees>
   final List<Widget> listOfVisitedTrees = [];
   List<Tree> listOfTree = [];
   bool isLoading = false;
+  List<String> listOfUserVisited = [];
+  Map<String, Tree> mapOfTrees = Map();
 
   @override
   void initState() {
@@ -49,9 +49,9 @@ class _VisitedTreesState extends State<VisitedTrees>
 
     final StaticData data = Provider.of<StaticData>(context);
     final User user = Provider.of<User>(context);
-    final UserList userLst = Provider.of<UserList>(context);
 
-    listOfTree = userLst.listOfVisitedTree;
+    listOfUserVisited = user.adoptedTrees;
+    mapOfTrees = data.mapOfTree;
 
     return Card(
       elevation: 32.0,

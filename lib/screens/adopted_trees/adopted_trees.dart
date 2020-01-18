@@ -1,13 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/models/user.dart';
-import 'package:tree_secure/models/user_list.dart';
 import 'package:tree_secure/screens/tree_view/tree_view.dart';
 import 'package:tree_secure/shared/loading_spinner.dart';
 
@@ -19,7 +16,9 @@ class AdoptedTrees extends StatefulWidget {
 class _AdoptedTreesState extends State<AdoptedTrees>
     with AutomaticKeepAliveClientMixin {
   final List<Widget> listOfAdoptedTrees = [];
+  List<String> listOfUserAdapted = [];
   List<Tree> listOfTree = [];
+  Map<String, Tree> mapOfTrees = Map();
   bool isLoading = false;
 
   @override
@@ -51,9 +50,9 @@ class _AdoptedTreesState extends State<AdoptedTrees>
 
     final StaticData data = Provider.of<StaticData>(context);
     final User user = Provider.of<User>(context);
-    final UserList userLst = Provider.of<UserList>(context);
 
-    listOfTree = userLst.listOfAdoptedTree;
+    listOfUserAdapted = user.adoptedTrees;
+    mapOfTrees = data.mapOfTree;
 
     return Card(
       elevation: 32.0,
@@ -83,9 +82,10 @@ class _AdoptedTreesState extends State<AdoptedTrees>
                       scrollDirection: Axis.vertical,
                       cacheExtent: 20.0,
                       shrinkWrap: true,
-                      itemCount: listOfTree.length,
+                      itemCount: listOfUserAdapted.length,
                       itemBuilder: (BuildContext context, int index) {
-                        Tree tempTree = listOfTree[index];
+                        String key = listOfUserAdapted[index];
+                        Tree tempTree = mapOfTrees[key];
 
                         return ListTile(
                             contentPadding: EdgeInsets.symmetric(
