@@ -26,6 +26,21 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
     });
   }
 
+  Set<Marker> _buildMarkers() {
+    Set<Marker> markers = Set<Marker>();
+    markers.add(
+      Marker(
+        markerId: MarkerId('value'),
+        position: const LatLng(1.3521, 103.8198),
+        infoWindow: InfoWindow(
+          title: 'TITLE',
+          snippet: 'INFO',
+        ),
+      ),
+    );
+    return markers;
+  }
+
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<User>(context);
@@ -44,6 +59,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
             ctrl.setMapStyle(_mapLightTheme);
           }
         },
+        markers: _buildMarkers(),
       ),
     );
   }
