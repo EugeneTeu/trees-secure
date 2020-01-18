@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       value: AuthService.instance.currUserModel,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: buildLightTheme(),
+        theme: buildDarkTheme(),
         home: AuthWrapper(),
       ),
     );
