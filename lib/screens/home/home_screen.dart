@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:tree_secure/screens/adopted_trees/adopted_trees.dart';
 import 'package:tree_secure/screens/discover_trees/discover_trees.dart';
+import 'package:tree_secure/screens/splash/splash_screen.dart';
 import 'package:tree_secure/screens/visited_trees/visited_trees.dart';
 import 'package:tree_secure/services/auth_service.dart';
 import 'package:tree_secure/models/user.dart';
@@ -24,6 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final User user = Provider.of<User>(context);
     final AuthUser authUser = Provider.of<AuthUser>(context);
+
+    if (user == null) {
+      return SplashScreen();
+    }
 
     return Scaffold(
       drawer: Drawer(
