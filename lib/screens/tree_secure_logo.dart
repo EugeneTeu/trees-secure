@@ -5,8 +5,8 @@ class TreeSecureLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
-      width: 400,
+      height: MediaQuery.of(context).size.height / 2,
+      width: MediaQuery.of(context).size.width / 3 * 2,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -26,32 +26,32 @@ class TreeSecureLogo extends StatelessWidget {
             quarterTurns: 6,
           ),*/
           Positioned(
-              top: 300,
-              left: 30,
+              top: 280,
+              left: 40,
               child: Text(
                 "Tree-Secure",
-                style: TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               )),
           Center(
             child: Icon(
               LineIcons.tree,
-              size: 200,
+              size: 150,
             ),
           ),
           Positioned(
             top: 130,
-            left: 190,
+            left: 150,
             child: Icon(
               LineIcons.tree,
-              size: 200,
+              size: 150,
             ),
           ),
           Positioned(
             top: 130,
-            right: 190,
+            right: 150,
             child: Icon(
               LineIcons.tree,
-              size: 200,
+              size: 150,
             ),
           )
         ],
