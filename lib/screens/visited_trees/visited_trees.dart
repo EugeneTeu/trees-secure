@@ -89,33 +89,42 @@ class _VisitedTreesState extends State<VisitedTrees>
                     Tree tempTree = mapOfTrees[key];
 
                     return ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 10.0,
-                        ),
-                        title: Text("${tempTree.commonName}"),
-                        leading: Container(
-                          padding: EdgeInsets.only(right: 12.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              right: BorderSide(
-                                  width: 1.0,
-                                  color: Theme.of(context).accentColor),
-                            ),
-                          ),
-                          child: Image.network(
-                            tempTree.image,
-                            width: 70,
-                            height: 70,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                        vertical: 10.0,
+                      ),
+                      title: Text("${tempTree.commonName}"),
+                      leading: Container(
+                        padding: EdgeInsets.only(right: 12.0),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                                width: 1.0,
+                                color: Theme.of(context).accentColor),
                           ),
                         ),
-                        subtitle: Text("ID: ${tempTree.id}"),
-                        trailing: IconButton(
-                          onPressed: () {
-                            _showTreeDialog(context, tempTree);
-                          },
-                          icon: Icon(Icons.keyboard_arrow_right, size: 30.0),
-                        ));
+                        child: tempTree.images.isEmpty
+                            ? SizedBox.shrink()
+                            : Image.network(
+                                tempTree.images[0],
+                                width: 70,
+                                height: 70,
+                              ),
+                      ),
+                      subtitle: Text("ID: ${tempTree.id}"),
+                      trailing: IconButton(
+                        onPressed: () {
+                          _showTreeDialog(
+                            context,
+                            tempTree,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.keyboard_arrow_right,
+                          size: 30.0,
+                        ),
+                      ),
+                    );
                   },
                 ),
         ),

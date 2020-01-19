@@ -105,11 +105,13 @@ class _AdoptedTreesState extends State<AdoptedTrees>
                                   ),
                                 ),
                               ),
-                              child: Image.network(
-                                tempTree.image,
-                                width: 70,
-                                height: 70,
-                              ),
+                              child: tempTree.images.isEmpty
+                                  ? SizedBox.shrink()
+                                  : Image.network(
+                                      tempTree.images[0],
+                                      width: 70,
+                                      height: 70,
+                                    ),
                             ),
                             subtitle: Text("ID: ${tempTree.id}"),
                             trailing: IconButton(

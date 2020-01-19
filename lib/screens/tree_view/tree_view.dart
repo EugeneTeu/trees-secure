@@ -62,9 +62,9 @@ class _TreeViewState extends State<TreeView> {
         children: ListTile.divideTiles(
           context: context,
           tiles: [
-            ...(widget.tree.image == null
+            ...(widget.tree.images[0] == null
                 ? []
-                : [Image.network(widget.tree.image)]),
+                : [Image.network(widget.tree.images[0])]),
             ListTile(
               title: Text(widget.tree.scientificName),
               subtitle: Text("Scientific Name"),
