@@ -36,7 +36,7 @@ class _AdoptedTreesState extends State<AdoptedTrees>
               borderRadius: BorderRadius.circular(8.0),
             ),
             elevation: 0.0,
-            child: TreeView(tree, false, null),
+            child: TreeView(tree, false, null, null),
           ),
         );
       },

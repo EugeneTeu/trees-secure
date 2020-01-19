@@ -13,6 +13,10 @@ import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/screens/tree_view/tree_view.dart';
 
 class DiscoverTreesMap extends StatefulWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey;
+
+  DiscoverTreesMap(this._scaffoldKey);
+
   @override
   _DiscoverTreesMapState createState() => _DiscoverTreesMapState();
 }
@@ -42,7 +46,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     positionStream.cancel();
     super.dispose();
   }
@@ -65,7 +69,9 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
                 builder: (BuildContext _) {
                   return Theme(
                     data: Theme.of(context),
-                    child: Dialog(child: TreeView(tree, true, currPosition)),
+                    child: Dialog(
+                        child: TreeView(
+                            tree, true, currPosition, widget._scaffoldKey)),
                   );
                 },
               );

@@ -9,11 +9,12 @@ import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
 import 'package:tree_secure/services/firestore_service.dart';
 
 class TreeView extends StatefulWidget {
-  TreeView(this.tree, this.fromDiscoverScreen, this.currPosition);
+  TreeView(this.tree, this.fromDiscoverScreen, this.currPosition, this._scaffoldKey);
 
   final Tree tree;
   final bool fromDiscoverScreen;
   final Position currPosition;
+  final GlobalKey<ScaffoldState> _scaffoldKey;
 
   @override
   _TreeViewState createState() => _TreeViewState();
@@ -81,11 +82,21 @@ class _TreeViewState extends State<TreeView> {
                     children: <Widget>[
                       RaisedButton(
                         color: Colors.blueAccent,
-                        child: !withinRange() ? Text('TOO FAR TO VISIT') : Text("VISIT"),
-                        onPressed: !withinRange() ? null : () {
-                          this.fs.visitTree(widget.tree.id);
-                          Navigator.of(context).pop();
-                        },
+                        child: !withinRange()
+                            ? Text('TOO FAR TO VISIT')
+                            : Text("VISIT"),
+                        onPressed: !withinRange()
+                            ? null
+                            : () {
+                                this.fs.visitTree(widget.tree.id);
+                                Navigator.of(context).pop();
+                                widget._scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text('Successfully visited this tree!'),
+                                  ),
+                                );
+                              },
                       ),
                       Divider(),
                       RaisedButton(
