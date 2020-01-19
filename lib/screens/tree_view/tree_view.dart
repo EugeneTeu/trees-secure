@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
 import 'package:tree_secure/models/tree.dart';
+import 'package:tree_secure/models/user.dart';
 import 'package:tree_secure/services/firestore_service.dart';
 
 class TreeView extends StatelessWidget {
@@ -9,6 +12,23 @@ class TreeView extends StatelessWidget {
   final Tree tree;
   final bool fromDiscoverScreen;
   final FirestoreService fs = FirestoreService.instance;
+
+  Future<Position> getLocation() {
+    return Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  }
+
+  bool withinRange(String centre) {
+    getLocation()
+    .then((Position position) {
+      print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
+      print('Centre: $centre');
+      return true;
+    })
+    .catchError((error) {
+      print(error.toString());
+      return false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +71,9 @@ class TreeView extends StatelessWidget {
                         color: Colors.blueAccent,
                         child: Text("Visit"),
                         onPressed: () {
+                          if (withinRange(this.tree.location)) {
+                            print('Within range.');
+                          }
                           this.fs.visitTree(tree.id);
                         },
                       ),
