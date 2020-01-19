@@ -12,7 +12,11 @@ import 'package:tree_secure/models/user.dart';
 class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AuthUser authUser = Provider.of<AuthUser>(context);
+    final AuthUser authUser = Provider.of<AuthUser>(
+      context,
+      listen: true,
+    );
+    print(authUser);
 
     if (authUser == null) {
       // on first startup; show splashscreen to get UserModel
@@ -26,7 +30,9 @@ class AuthWrapper extends StatelessWidget {
       // UserModel is ok; user is authenticated successfully
       FirestoreService.initInstance(uid: authUser.uid);
       return StreamProvider<User>.value(
-          value: FirestoreService.instance.currUser, child: HomeScreen());
+        value: FirestoreService.instance.currUser,
+        child: HomeScreen(),
+      );
     }
   }
 }

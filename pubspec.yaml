@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  provider: any
+  provider: ^3.2.0
   geojson: any
   stripe_payment: ^1.0.6
   firebase_core: ^0.4.0+9

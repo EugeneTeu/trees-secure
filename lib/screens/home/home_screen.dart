@@ -87,21 +87,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   _onChangePage(0);
                 },
                 selected: 0 == index,
-                title: Text('Discover Trees'),
+                title: Text(
+                  'Discover Trees',
+                  style: TextStyle(fontSize: 17),
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
               ListTile(
                 onTap: () {
                   _onChangePage(1);
                 },
                 selected: 1 == index,
-                title: Text('Adopted Trees'),
+                title: Text(
+                  'Adopted Trees',
+                  style: TextStyle(fontSize: 17),
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
               ListTile(
                 onTap: () {
                   _onChangePage(2);
                 },
                 selected: 2 == index,
-                title: Text('Visited Trees'),
+                title: Text(
+                  'Visited Trees',
+                  style: TextStyle(fontSize: 17),
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
             ],
           ),

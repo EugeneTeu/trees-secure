@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:provider/provider.dart';
-
 import 'package:tree_secure/models/tree.dart';
-import 'package:tree_secure/models/user.dart';
+import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
 import 'package:tree_secure/services/firestore_service.dart';
 
 class TreeView extends StatelessWidget {
@@ -75,6 +73,7 @@ class TreeView extends StatelessWidget {
                             print('Within range.');
                           }
                           this.fs.visitTree(tree.id);
+                          Navigator.of(context).pop();
                         },
                       ),
                       Divider(),
@@ -82,7 +81,13 @@ class TreeView extends StatelessWidget {
                         color: Colors.green,
                         child: Text("Adopt"),
                         onPressed: () {
-                          this.fs.adoptTree(tree.id);
+                          Navigator.of(context).pop();
+                          showDialog(
+                              context: context,
+                              builder: (_) => WebviewStripe());
+
+                          //this.fs.adoptTree(tree.id);
+                          //Navigator.of(context).pop();
                         },
                       ),
                     ],

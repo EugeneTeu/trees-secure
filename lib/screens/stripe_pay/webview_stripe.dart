@@ -21,11 +21,23 @@ class _WebviewStripeState extends State<WebviewStripe> {
         future: rootBundle.loadString('assets/stripe_checkout.html'),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return WebView(
-              initialUrl: new Uri.dataFromString(snapshot.data,
-                      mimeType: 'text/html')
-                  .toString(), // maybe you Uri.dataFromString(snapshot.data, mimeType: 'text/html', encoding: Encoding.getByName("UTF-8")).toString()
-              javascriptMode: JavascriptMode.unrestricted,
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  height: 50,
+                  child: RaisedButton(),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height / 10 * 7,
+                  child: WebView(
+                    initialUrl: new Uri.dataFromString(snapshot.data,
+                            mimeType: 'text/html')
+                        .toString(), // maybe you Uri.dataFromString(snapshot.data, mimeType: 'text/html', encoding: Encoding.getByName("UTF-8")).toString()
+                    javascriptMode: JavascriptMode.unrestricted,
+                  ),
+                ),
+              ],
             );
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
