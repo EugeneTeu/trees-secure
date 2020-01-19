@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:tree_secure/models/static_data.dart';
 
@@ -84,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               ListTile(
+                leading: Icon(LineIcons.fire),
                 onTap: () {
                   _onChangePage(0);
                 },
@@ -96,6 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
               ListTile(
+                leading: Icon(LineIcons.dollar),
                 onTap: () {
                   _onChangePage(1);
                 },
@@ -108,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               ),
               ListTile(
+                leading: Icon(LineIcons.leaf),
                 onTap: () {
                   _onChangePage(2);
                 },
