@@ -11,11 +11,11 @@ def analyse(page):
 
   # Get image
   try:
-    image = soup.find(class_="banner-image")
-    src = 'https://www.nparks.gov.sg' + image.get('data-src')
-    page['image'] = src
+    images = soup.find_all(class_="banner-image")
+    def getSource(image): return 'https://www.nparks.gov.sg' + image.get('data-src')
+    page['images'] = list(map(getSource, images))
   except:
-    page['image'] = None
+    page['images'] = []
 
   # Get description
   try:
@@ -99,7 +99,7 @@ for tree in trees:
   if (uid is not None):
     datum['link'] = tree['url']
     datum['coordinates'] = tree['coordinates']
-    datum['image'] = tree['image']
+    datum['images'] = tree['images']
     datum['description'] = tree['description']
     datum['location'] = tree['location']
     datum['scientific_name'] = tree['scientific_name']
