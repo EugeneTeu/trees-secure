@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,8 @@ class DiscoverTreesMap extends StatefulWidget {
 class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
   String _mapDarkTheme;
   String _mapLightTheme;
+  StreamSubscription<Position> positionStream;
+  Position currPosition;
 
   @override
   void initState() {
@@ -29,6 +33,18 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
     rootBundle.loadString('assets/map_light_theme.json').then((string) {
       _mapLightTheme = string;
     });
+    positionStream =
+        Geolocator().getPositionStream().listen((Position position) {
+      setState(() {
+        currPosition = position;
+      });
+    });
+  }
+
+  @override
+  void dispose() { 
+    positionStream.cancel();
+    super.dispose();
   }
 
   Set<Marker> _buildMarkers(Map<String, Tree> treeData, BuildContext context) {
@@ -49,9 +65,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
                 builder: (BuildContext _) {
                   return Theme(
                     data: Theme.of(context),
-                    child: Dialog(
-                      child: TreeView(tree, true),
-                    ),
+                    child: Dialog(child: TreeView(tree, true, currPosition)),
                   );
                 },
               );
