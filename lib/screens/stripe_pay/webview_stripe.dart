@@ -13,8 +13,6 @@ class WebviewStripe extends StatefulWidget {
 }
 
 class _WebviewStripeState extends State<WebviewStripe> {
-  Completer<WebViewController> _controller = Completer<WebViewController>();
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
@@ -25,11 +23,8 @@ class _WebviewStripeState extends State<WebviewStripe> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  height: 50,
-                  child: RaisedButton(),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 10 * 7,
+                  height: MediaQuery.of(context).size.height / 10 * 8,
+                  width: MediaQuery.of(context).size.width / 10 * 9,
                   child: WebView(
                     initialUrl: new Uri.dataFromString(snapshot.data,
                             mimeType: 'text/html')
