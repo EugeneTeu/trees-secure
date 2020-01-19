@@ -117,7 +117,7 @@ class _TreeViewState extends State<TreeView> {
                       RaisedButton(
                         color: Colors.blueAccent,
                         child: isAlreadyVisited()
-                            ? Text('ALREADY VISITED')
+                            ? Text('VISITED')
                             : !withinRange()
                                 ? Text('TOO FAR TO VISIT')
                                 : Text('VISIT'),
@@ -139,7 +139,7 @@ class _TreeViewState extends State<TreeView> {
                       RaisedButton(
                         color: Colors.green,
                         child: isAlreadyAdopted()
-                            ? Text('ALREADY ADOPTED')
+                            ? Text('ADOPTED')
                             : Text('ADOPT'),
                         onPressed: isAlreadyAdopted()
                             ? null
@@ -148,7 +148,9 @@ class _TreeViewState extends State<TreeView> {
                                 showDialog(
                                   context: context,
                                   builder: (_) => WebviewStripe(),
-                                );
+                                ).then((_) {
+                                  fs.adoptTree(widget.tree.id);
+                                });
                                 //this.fs.adoptTree(tree.id);
                                 //Navigator.of(context).pop();
                               },

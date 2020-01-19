@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 currentAccountPicture: CircleAvatar(
                   radius: 30.0,
                   backgroundImage:
-                      NetworkImage('https://via.placeholder.com/150'),
+                      NetworkImage('https://i.etsystatic.com/13693104/r/il/6f7817/1499379340/il_1588xN.1499379340_9dk7.jpg'),
                   backgroundColor: Colors.transparent,
                 ),
                 decoration: BoxDecoration(
