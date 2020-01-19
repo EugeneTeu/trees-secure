@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +13,10 @@ import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/screens/tree_view/tree_view.dart';
 
 class DiscoverTreesMap extends StatefulWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey;
+
+  DiscoverTreesMap(this._scaffoldKey);
+
   @override
   _DiscoverTreesMapState createState() => _DiscoverTreesMapState();
 }
@@ -18,6 +24,8 @@ class DiscoverTreesMap extends StatefulWidget {
 class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
   String _mapDarkTheme;
   String _mapLightTheme;
+  StreamSubscription<Position> positionStream;
+  Position currPosition;
 
   @override
   void initState() {
@@ -29,9 +37,21 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
     rootBundle.loadString('assets/map_light_theme.json').then((string) {
       _mapLightTheme = string;
     });
+    positionStream =
+        Geolocator().getPositionStream().listen((Position position) {
+      setState(() {
+        currPosition = position;
+      });
+    });
   }
 
-  Set<Marker> _buildMarkers(Map<String, Tree> treeData, BuildContext context) {
+  @override
+  void dispose() {
+    positionStream.cancel();
+    super.dispose();
+  }
+
+  Set<Marker> _buildMarkers(Map<String, Tree> treeData, BuildContext context, User user) {
     Set<Marker> markers = Set<Marker>();
 
     treeData.forEach((String id, Tree tree) {
@@ -50,7 +70,13 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
                   return Theme(
                     data: Theme.of(context),
                     child: Dialog(
-                      child: TreeView(tree, true),
+                      child: TreeView(
+                        tree,
+                        true,
+                        currPosition,
+                        widget._scaffoldKey,
+                        user
+                      ),
                     ),
                   );
                 },
@@ -86,7 +112,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
             ctrl.setMapStyle(_mapLightTheme);
           }
         },
-        markers: _buildMarkers(treeData, context),
+        markers: _buildMarkers(treeData, context, user),
       ),
     );
   }

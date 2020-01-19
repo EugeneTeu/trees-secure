@@ -19,10 +19,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final AuthService _auth = AuthService.instance;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<Widget> pages = [
-    DiscoverTreesMap(),
+    DiscoverTreesMap(_scaffoldKey),
     AdoptedTrees(),
     VisitedTrees(),
     SettingsPage()
@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
       debugShowCheckedModeBanner: false,
       theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
       home: Scaffold(
+        resizeToAvoidBottomPadding : false,
         key: _scaffoldKey,
         drawer: Drawer(
           child: ListView(
