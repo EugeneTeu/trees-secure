@@ -67,7 +67,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
   Widget build(BuildContext context) {
     final User user = Provider.of<User>(context);
     final Map<String, Tree> treeData =
-        Provider.of<StaticData>(context, listen: false).mapOfTree;
+        Provider.of<StaticData>(context).mapOfTree;
 
     return Container(
       child: GoogleMap(
@@ -78,7 +78,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
         myLocationEnabled: true,
         onMapCreated: (GoogleMapController ctrl) {
           if (_mapDarkTheme == null || _mapLightTheme == null) {
-            return ;
+            return;
           }
           if (user.isDarkTheme) {
             ctrl.setMapStyle(_mapDarkTheme);
