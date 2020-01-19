@@ -90,9 +90,9 @@ class TreeView extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pop();
                           showDialog(
-                              context: context,
-                              builder: (_) => WebviewStripe());
-
+                            context: context,
+                            builder: (_) => WebviewStripe(),
+                          );
                           //this.fs.adoptTree(tree.id);
                           //Navigator.of(context).pop();
                         },
