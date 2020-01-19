@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
       debugShowCheckedModeBanner: false,
       theme: user.isDarkTheme ? buildDarkTheme() : buildLightTheme(),
       home: Scaffold(
+        resizeToAvoidBottomPadding : false,
         key: _scaffoldKey,
         drawer: Drawer(
           child: ListView(

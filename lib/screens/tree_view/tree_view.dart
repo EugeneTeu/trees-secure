@@ -4,17 +4,22 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong/latlong.dart';
+
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
 import 'package:tree_secure/services/firestore_service.dart';
 
+import 'package:tree_secure/models/user.dart';
+
 class TreeView extends StatefulWidget {
-  TreeView(this.tree, this.fromDiscoverScreen, this.currPosition, this._scaffoldKey);
+  TreeView(this.tree, this.fromDiscoverScreen, this.currPosition,
+      this._scaffoldKey, this.user);
 
   final Tree tree;
   final bool fromDiscoverScreen;
   final Position currPosition;
   final GlobalKey<ScaffoldState> _scaffoldKey;
+  final User user;
 
   @override
   _TreeViewState createState() => _TreeViewState();
@@ -26,6 +31,14 @@ class _TreeViewState extends State<TreeView> {
   Future<Position> getLocation() {
     return Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  }
+
+  bool isAlreadyVisited() {
+    return widget.user.visitedTrees.contains(widget.tree.id);
+  }
+
+  bool isAlreadyAdopted() {
+    return widget.user.adoptedTrees.contains(widget.tree.id);
   }
 
   bool withinRange() {
@@ -82,10 +95,12 @@ class _TreeViewState extends State<TreeView> {
                     children: <Widget>[
                       RaisedButton(
                         color: Colors.blueAccent,
-                        child: !withinRange()
-                            ? Text('TOO FAR TO VISIT')
-                            : Text("VISIT"),
-                        onPressed: !withinRange()
+                        child: isAlreadyVisited()
+                            ? Text('ALREADY VISITED')
+                            : !withinRange()
+                                ? Text('TOO FAR TO VISIT')
+                                : Text('VISIT'),
+                        onPressed: !withinRange() || isAlreadyVisited()
                             ? null
                             : () {
                                 this.fs.visitTree(widget.tree.id);
@@ -93,7 +108,8 @@ class _TreeViewState extends State<TreeView> {
                                 widget._scaffoldKey.currentState.showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.green,
-                                    content: Text('Successfully visited this tree!'),
+                                    content:
+                                        Text('Successfully visited this tree!'),
                                   ),
                                 );
                               },
@@ -101,16 +117,18 @@ class _TreeViewState extends State<TreeView> {
                       Divider(),
                       RaisedButton(
                         color: Colors.green,
-                        child: Text("ADOPT"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          showDialog(
-                            context: context,
-                            builder: (_) => WebviewStripe(),
-                          );
-                          //this.fs.adoptTree(tree.id);
-                          //Navigator.of(context).pop();
-                        },
+                        child: isAlreadyAdopted() ? Text('ALREADY ADOPTED') : Text('ADOPT'),
+                        onPressed: isAlreadyAdopted()
+                            ? null
+                            : () {
+                                Navigator.of(context).pop();
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => WebviewStripe(),
+                                );
+                                //this.fs.adoptTree(tree.id);
+                                //Navigator.of(context).pop();
+                              },
                       ),
                     ],
                   )

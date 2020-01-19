@@ -51,7 +51,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
     super.dispose();
   }
 
-  Set<Marker> _buildMarkers(Map<String, Tree> treeData, BuildContext context) {
+  Set<Marker> _buildMarkers(Map<String, Tree> treeData, BuildContext context, User user) {
     Set<Marker> markers = Set<Marker>();
 
     treeData.forEach((String id, Tree tree) {
@@ -70,8 +70,14 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
                   return Theme(
                     data: Theme.of(context),
                     child: Dialog(
-                        child: TreeView(
-                            tree, true, currPosition, widget._scaffoldKey)),
+                      child: TreeView(
+                        tree,
+                        true,
+                        currPosition,
+                        widget._scaffoldKey,
+                        user
+                      ),
+                    ),
                   );
                 },
               );
@@ -106,7 +112,7 @@ class _DiscoverTreesMapState extends State<DiscoverTreesMap> {
             ctrl.setMapStyle(_mapLightTheme);
           }
         },
-        markers: _buildMarkers(treeData, context),
+        markers: _buildMarkers(treeData, context, user),
       ),
     );
   }

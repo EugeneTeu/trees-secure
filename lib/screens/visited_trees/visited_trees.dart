@@ -37,7 +37,7 @@ class _VisitedTreesState extends State<VisitedTrees>
               borderRadius: BorderRadius.circular(8.0),
             ),
             elevation: 0.0,
-            child: TreeView(tree, false, null, null),
+            child: TreeView(tree, false, null, null, null),
           ),
         );
       },
