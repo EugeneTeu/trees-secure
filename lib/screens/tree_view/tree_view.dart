@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong/latlong.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:tree_secure/models/tree.dart';
 import 'package:tree_secure/screens/stripe_pay/webview_stripe.dart';
@@ -64,7 +65,27 @@ class _TreeViewState extends State<TreeView> {
           tiles: [
             ...(widget.tree.images[0] == null
                 ? []
-                : [Image.network(widget.tree.images[0])]),
+                : [
+                    CarouselSlider(
+                      height: 250,
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 2, milliseconds: 500),
+                      items: widget.tree.images.map((String url) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                              child: Image.network(
+                                url,
+                                height: 250,
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    )
+                  ]),
             ListTile(
               title: Text(widget.tree.scientificName),
               subtitle: Text("Scientific Name"),
@@ -117,7 +138,9 @@ class _TreeViewState extends State<TreeView> {
                       Divider(),
                       RaisedButton(
                         color: Colors.green,
-                        child: isAlreadyAdopted() ? Text('ALREADY ADOPTED') : Text('ADOPT'),
+                        child: isAlreadyAdopted()
+                            ? Text('ALREADY ADOPTED')
+                            : Text('ADOPT'),
                         onPressed: isAlreadyAdopted()
                             ? null
                             : () {

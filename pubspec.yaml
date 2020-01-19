@@ -33,7 +33,7 @@ dependencies:
   url_launcher: any
   line_icons: 0.2.0
   geolocator: ^5.1.4+2
-
+  carousel_slider: ^1.4.1
 
   # To update the model serializer files, run this command:
   # flutter pub run build_runner build
