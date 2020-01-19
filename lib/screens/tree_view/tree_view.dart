@@ -34,11 +34,11 @@ class TreeView extends StatelessWidget {
             ),
             ListTile(
               title: Text(tree.girth),
-              subtitle: Text("Girth"),
+              subtitle: Text("Girth (m)"),
             ),
             ListTile(
               title: Text(tree.height),
-              subtitle: Text("Height"),
+              subtitle: Text("Height (m)"),
             ),
             ListTile(
               title: Text(tree.location),
@@ -50,7 +50,7 @@ class TreeView extends StatelessWidget {
                     children: <Widget>[
                       RaisedButton(
                         color: Colors.blueAccent,
-                        child: Text("Visit"),
+                        child: Text("VISIT"),
                         onPressed: () {
                           this.fs.visitTree(tree.id);
                           Navigator.of(context).pop();
@@ -59,7 +59,7 @@ class TreeView extends StatelessWidget {
                       Divider(),
                       RaisedButton(
                         color: Colors.green,
-                        child: Text("Adopt"),
+                        child: Text("ADOPT"),
                         onPressed: () {
                           Navigator.of(context).pop();
                           showDialog(
