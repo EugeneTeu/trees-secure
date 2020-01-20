@@ -1,4 +1,4 @@
-# Trees Secure
+# Tree Secure
 
 A not-so-serious cross-platform mobile app to spread the awareness of the heritage trees in Singapore.
 
