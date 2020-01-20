@@ -4,6 +4,8 @@ A not-so-serious cross-platform mobile app to spread the awareness of the herita
 
 Developed in 24 hours at NUS [Hack&Roll 2020](https://hacknroll.nushackers.org/).
 
+**[Try it out](https://github.com/AaronCQL/tree-secure/releases): Android APK is available**
+
 ## Completed Features
 
 1. An interactive map in the main "Discover Trees" page which shows the location markers of all the heritage trees in Singapore
